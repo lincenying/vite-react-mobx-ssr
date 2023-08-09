@@ -1,5 +1,6 @@
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import type { PrefetchContext } from './App'
 import { App, prefetch } from './App'
 import { createRoutes } from './routes'
 import { createStore } from './store'
@@ -19,8 +20,17 @@ if (window.__PREFETCHED_STATE__) {
     delete window.__PREFETCHED_STATE__
 }
 else {
+    const ctx: PrefetchContext = {
+        routes,
+        store,
+        req: { originalUrl: window.location.pathname },
+        api: undefined,
+        params: Object.fromEntries(
+            new URLSearchParams(window.location.search),
+        ),
+    }
     // fallback to client prefetch
-    prefetch({ routes, store, req: { originalUrl: window.location.pathname } }).then(
+    prefetch(ctx, 'client').then(
         () => {},
         () => {},
     )

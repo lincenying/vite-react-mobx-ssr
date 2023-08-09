@@ -15,7 +15,6 @@ type PickKeys<T> = {
 
 export class AppStore {
     home: HomeStore
-
     about: AboutStore
 
     constructor() {
@@ -30,7 +29,6 @@ export class AppStore {
             if (import.meta.env.DEV)
                 console.info(`hydrate ${k}`)
             if (this[k])
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
                 this[k]?.hydrate?.(data[k] as any)
         })
     }

@@ -15,11 +15,12 @@
     "strictNullChecks": true,
     "allowJs": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["vite/client"],
+    "types": ["node", "vite/client"],
     "paths": {
       "@/*": ["src/*"]
     },
-    "outDir": "build"
+    "outDir": "dist"
   },
+  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist/**/*", "public/**/*"]
 }

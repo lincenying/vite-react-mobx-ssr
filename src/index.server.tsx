@@ -5,6 +5,7 @@ import type { RenderContext } from './App'
 import { App, prefetch } from './App'
 import { createStore } from './store'
 import { createRoutes } from './routes'
+import { api } from './api/index-server'
 
 // see index.html
 const APP_HTML = '<!--app-html-->'
@@ -21,12 +22,17 @@ export async function render(context: RenderContext) {
 
     ctx.store = store
     ctx.routes = routes
+    ctx.api = api(req && req.cookies)
+    ctx.params = Object.fromEntries(
+        new URLSearchParams(req.originalUrl.replace('/?', '?')),
+    )
 
-    const success = await prefetch(ctx).catch((e) => {
+    const success = await prefetch(ctx, 'server').catch((e) => {
         console.error(e)
-
         return false
     })
+
+    console.log(1, success)
 
     const html = ReactDOMServer.renderToString(
         <StaticRouter location={req.originalUrl}>

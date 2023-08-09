@@ -2,7 +2,11 @@ interface requestParams {
     method: string
     body: any
     headers?: { authorization?: string }
-    query: any
+    query: {
+        id?: string
+        page?: number
+        pageSize?: number
+    }
 }
 
 const baseApi = 'mock-api'
