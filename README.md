@@ -2,9 +2,11 @@
 
 ## Usage
 
-+ dev: `make dev`
++ dev: `pnpm serve`
 
-+ build: `make build`
++ build: `pnpm build`
+
++ start: `pnpm start`
 
 ## Project Detail
 

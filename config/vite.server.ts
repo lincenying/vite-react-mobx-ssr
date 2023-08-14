@@ -11,8 +11,7 @@ export default defineConfig(({ mode }) => ({
         rollupOptions: {
             input: paths.server,
             output: {
-                dir: undefined, // must leave undefined explicitly
-                file: paths.serverOutput,
+                entryFileNames: '[name].js',
             },
         },
     },

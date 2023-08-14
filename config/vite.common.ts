@@ -1,9 +1,12 @@
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 import postcssNormalize from 'postcss-normalize'
 import react from '@vitejs/plugin-react'
 import flexbugsFixes from 'postcss-flexbugs-fixes'
 import presetEnv from 'postcss-preset-env'
 import type { ConfigEnv } from 'vite'
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const paths = {
     src: path.resolve(__dirname, '..', 'src'),

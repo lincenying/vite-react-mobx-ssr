@@ -5,26 +5,6 @@ import { viteMockServe } from '@lincy/vite-plugin-mock'
 
 import base, { paths } from './vite.common'
 
-// function devMock() {
-//     return {
-//         name: 'dev-api-mock',
-//         configureServer(vite: ViteDevServer) {
-//             const { logger } = vite.config
-
-//             vite.middlewares.use((req, res, next) => {
-//                 if (/^\/api\//.test(req.originalUrl!)) {
-//                     logger.info(`mock ${req.originalUrl!}`)
-
-//                     res.end('vite dev')
-//                 }
-//                 else {
-//                     next()
-//                 }
-//             })
-//         },
-//     }
-// }
-
 function devSSR() {
     return {
         name: 'dev-ssr',
@@ -33,12 +13,11 @@ function devSSR() {
             const templateHtml = fs.readFileSync(paths.template, 'utf-8')
 
             // 缺点是不能调试完整服务端代码，只能调试服务端同构应用的部分
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             return () => vite.middlewares.use(async (req, res, next) => {
                 try {
-                    const { render } = (await vite.ssrLoadModule(paths.serverEntry)) as { render: AnyFn }
+                    const { render } = (await vite.ssrLoadModule(paths.serverEntry))
                     const template = await vite.transformIndexHtml(req.originalUrl!, templateHtml)
-                    const { html } = (await render({ req, res, template })) as Obj
+                    const { html } = (await render({ req, res, template }))
 
                     res.end(html)
                 }
