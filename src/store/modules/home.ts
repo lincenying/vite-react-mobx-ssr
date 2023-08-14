@@ -1,4 +1,4 @@
-import { makeAutoObservable } from 'mobx'
+import { makeAutoObservable, runInAction } from 'mobx'
 import type { AppStore, PrefetchStore } from '..'
 import api from '@/api/index-client'
 import type { Article, ArticleStore } from '@/types'
@@ -36,21 +36,21 @@ export class HomeStore implements PrefetchStore<HomeState> {
         const { code, data } = await $api.get<ResDataLists<Article>>('article/lists', { ...config, cache: true, perPage: 30 })
 
         if (data && code === 200) {
-            let _data
+            let _data: Article[]
             if (config.page === 1)
                 _data = [...data.data]
             else
                 _data = this.state.lists.data.concat(data.data)
 
-            console.log(_data.length)
-
-            this.state.lists = {
-                data: _data,
-                hasNext: data.current_page < data.last_page ? 0 : 1,
-                hasPrev: data.current_page > 1 ? 1 : 0,
-                page: data.current_page,
-                path: config.path,
-            }
+            runInAction(() => {
+                this.state.lists = {
+                    data: _data,
+                    hasNext: data.current_page < data.last_page ? 0 : 1,
+                    hasPrev: data.current_page > 1 ? 1 : 0,
+                    page: data.current_page,
+                    path: config.path,
+                }
+            })
         }
 
         return 'success'

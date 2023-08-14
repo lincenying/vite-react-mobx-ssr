@@ -1,11 +1,14 @@
 import path from 'node:path'
 import fs from 'node:fs'
+import { fileURLToPath } from 'node:url'
 import express from 'express'
 
 type RenderFn = (...args: any[]) => Promise<{ html: string }>
 
 // hypothesis: client assets to be in the same directory
 export async function createServer() {
+    const __dirname = path.dirname(fileURLToPath(import.meta.url))
+
     const server = express()
 
     // const { render } = require(path.join(__dirname, 'index.server.js'))
@@ -20,7 +23,6 @@ export async function createServer() {
         res.send('react and vite!')
     })
 
-    // eslint-disable-next-line @typescript-eslint/no-misused-promises
     server.get('*', async (req, res) => {
         const { html } = await indexServer.render({ req, res, template })
 

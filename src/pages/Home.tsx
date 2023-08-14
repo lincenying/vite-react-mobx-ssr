@@ -6,11 +6,10 @@ import { useStore } from '@/store'
 import type { PrefetchContext } from '@/App'
 
 export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
-    const search = Object.fromEntries(
-        new URLSearchParams(ctx.req.originalUrl.replace('/?', '?')),
-    )
-    console.log(search)
-    return ctx.store.home.getArticleList({ page: 1 }, ctx.api)
+    return ctx.store.home.getArticleList({
+        page: 1,
+        path: ctx.req.originalUrl.split('?')[0],
+    }, ctx.api)
 }
 
 const Home = observer(() => {
