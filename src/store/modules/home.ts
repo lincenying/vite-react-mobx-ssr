@@ -3,23 +3,18 @@ import type { AppStore, PrefetchStore } from '..'
 import api from '@/api/index-client'
 import type { Article, ArticleStore } from '@/types'
 
-export interface HomeState {
-    state: ArticleStore
-}
+export class HomeStore implements PrefetchStore<ArticleStore> {
+    lists: ArticleStore['lists'] = {
+        data: [],
+        hasNext: 0,
+        page: 1,
+        path: '',
+    }
 
-export class HomeStore implements PrefetchStore<HomeState> {
-    state: ArticleStore = {
-        lists: {
-            data: [],
-            hasNext: 0,
-            page: 1,
-            path: '',
-        },
-        item: {
-            data: null,
-            path: '',
-            isLoad: false,
-        },
+    item: ArticleStore['item'] = {
+        data: null,
+        path: '',
+        isLoad: false,
     }
 
     root: AppStore
@@ -31,7 +26,7 @@ export class HomeStore implements PrefetchStore<HomeState> {
 
     async getArticleList(config: Obj = {}, $api?: ApiServer | ApiClient) {
         $api = $api || api
-        if (this.state.lists.data.length > 0 && config.path === this.state.lists.path && config.page === 1)
+        if (this.lists.data.length > 0 && config.path === this.lists.path && config.page === 1)
             return
         const { code, data } = await $api.get<ResDataLists<Article>>('article/lists', { ...config, cache: true, perPage: 30 })
 
@@ -40,10 +35,10 @@ export class HomeStore implements PrefetchStore<HomeState> {
             if (config.page === 1)
                 _data = [...data.data]
             else
-                _data = this.state.lists.data.concat(data.data)
+                _data = this.lists.data.concat(data.data)
 
             runInAction(() => {
-                this.state.lists = {
+                this.lists = {
                     data: _data,
                     hasNext: data.current_page < data.last_page ? 0 : 1,
                     hasPrev: data.current_page > 1 ? 1 : 0,
@@ -56,13 +51,15 @@ export class HomeStore implements PrefetchStore<HomeState> {
         return 'success'
     }
 
-    hydrate(state: HomeState): void {
-        this.state = state.state
+    hydrate(state: ArticleStore): void {
+        this.lists = state.lists
+        this.item = state.item
     }
 
-    dehydra(): HomeState {
+    dehydra(): ArticleStore {
         return {
-            state: this.state,
+            lists: this.lists,
+            item: this.item,
         }
     }
 }

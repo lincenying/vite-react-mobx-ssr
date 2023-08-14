@@ -15,7 +15,7 @@ export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
 const Home = observer(() => {
     const store = useStore('home')
     useMount(async () => {
-        if (store.state.lists.data.length === 0)
+        if (store.lists.data.length === 0)
             await store.getArticleList()
     })
 
@@ -25,7 +25,7 @@ const Home = observer(() => {
         <div>
             <button onClick={() => navigate('/about?key=about')}>about</button>
             {
-                store.state.lists.data.map((item) => {
+                store.lists.data.map((item) => {
                     return <div key={item.c_id}>{ item.c_title}</div>
                 })
             }
