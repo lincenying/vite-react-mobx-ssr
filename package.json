@@ -3,7 +3,7 @@
   "type": "module",
   "private": true,
   "scripts": {
-    "prepare": "husky install",
+    "prepare": "sh simple-git-hooks.sh",
     "clean": "rm -rf ./dist",
     "serve": "vite --mode development --config config/vite.dev.ts",
     "build:prod": "vite build --mode production --config config/vite.prod.ts",
@@ -29,9 +29,6 @@
     "serialize-javascript": "^6.0.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.10",
-    "@babel/preset-env": "^7.22.10",
-    "@babel/preset-typescript": "^7.22.5",
     "@lincy/eslint-config": "^2.1.0",
     "@lincy/eslint-config-react": "^2.1.0",
     "@lincy/stylelint-config": "^1.15.10",
@@ -55,9 +52,13 @@
     "postcss-normalize": "^10.0.1",
     "postcss-preset-env": "^9.1.1",
     "sass": "^1.65.1",
+    "simple-git-hooks": "^2.9.0",
     "stylelint": "^15.10.2",
     "typescript": "^5.1.6",
     "vite": "^4.4.9"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged"
   },
   "lint-staged": {
     "*.{js,ts,jsx,tsx}": "eslint --fix",
