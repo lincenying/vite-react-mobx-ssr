@@ -1,25 +1,25 @@
 {
   "compilerOptions": {
-    "baseUrl": ".",
-    "module": "ESNext",
     "target": "ESNext",
     "lib": ["DOM", "ESNext"],
-    "strict": true,
-    "esModuleInterop": true,
     "jsx": "react-jsx",
-    "skipLibCheck": true,
-    "importHelpers": true,
+    "module": "ESNext",
     "moduleResolution": "node",
-    "resolveJsonModule": true,
-    "noUnusedLocals": true,
-    "strictNullChecks": true,
-    "allowJs": true,
-    "forceConsistentCasingInFileNames": true,
-    "types": ["node", "vite/client"],
+    "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
     },
-    "outDir": "dist"
+    "types": ["node", "vite/client"],
+    "resolveJsonModule": true,
+    "allowJs": true,
+    "outDir": "dist",
+    "importHelpers": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "strictNullChecks": true,
+    "noUnusedLocals": true,
+    "skipLibCheck": true
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist/**/*", "public/**/*"]

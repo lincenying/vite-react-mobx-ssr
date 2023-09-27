@@ -29,7 +29,7 @@
     "serialize-javascript": "^6.0.1"
   },
   "devDependencies": {
-    "@lincy/eslint-config": "^2.1.0",
+    "@lincy/eslint-config": "^3.1.0",
     "@lincy/eslint-config-react": "^2.1.0",
     "@lincy/stylelint-config": "^1.15.10",
     "@lincy/vite-plugin-mock": "^3.0.0",
@@ -44,6 +44,8 @@
     "@vitejs/plugin-react": "^4.0.4",
     "ahooks": "^3.7.8",
     "eslint": "^8.47.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
     "lint-staged": "^14.0.0",
     "lru-cache": "^10.0.1",
@@ -55,7 +57,10 @@
     "simple-git-hooks": "^2.9.0",
     "stylelint": "^15.10.2",
     "typescript": "^5.1.6",
-    "vite": "^4.4.9"
+    "unocss": "^0.56.4",
+    "unplugin-auto-import": "^0.16.6",
+    "vite": "^4.4.9",
+    "vite-plugin-importus": "^1.0.4"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

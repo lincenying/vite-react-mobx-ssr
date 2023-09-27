@@ -1,9 +1,0 @@
-{
-  "extends": ["@lincy/eslint-config-react", "@unocss"],
-  "globals": {
-
-  },
-  "rules": {
-
-  }
-}
