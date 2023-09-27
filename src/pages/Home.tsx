@@ -1,7 +1,3 @@
-import { observer } from 'mobx-react-lite'
-import { useNavigate } from 'react-router-dom'
-import { useMount } from 'ahooks'
-
 import { useStore } from '@/store'
 import type { PrefetchContext } from '@/App'
 

@@ -1,5 +1,3 @@
-import { observer } from 'mobx-react-lite'
-import { useLocation, useNavigate, useParams, useSearchParams } from 'react-router-dom'
 import { useStore } from '@/store'
 
 const About = observer(() => {

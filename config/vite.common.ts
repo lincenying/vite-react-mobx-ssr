@@ -1,9 +1,14 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import postcssNormalize from 'postcss-normalize'
 import react from '@vitejs/plugin-react'
+import UnoCSS from 'unocss/vite'
+import AutoImport from 'unplugin-auto-import/vite'
+import vitePluginImportus from 'vite-plugin-importus'
+
+import postcssNormalize from 'postcss-normalize'
 import flexbugsFixes from 'postcss-flexbugs-fixes'
 import presetEnv from 'postcss-preset-env'
+
 import type { ConfigEnv } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
@@ -44,5 +49,37 @@ export default ({ mode }: ConfigEnv) => ({
     },
     plugins: [
         react(),
+        AutoImport({
+            eslintrc: {
+                enabled: true,
+            },
+            include: [
+                /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
+                /\.md$/, // .md
+            ],
+            imports: [
+                'react',
+                'react-router-dom',
+                'ahooks',
+                {
+                    'mobx-react-lite': ['observer'],
+                    '@/utils': ['setMessage'],
+                },
+            ],
+            dts: 'src/auto-imports.d.ts',
+            dirs: [],
+
+            resolvers: [],
+            defaultExportByFilename: false,
+            vueTemplate: false,
+        }),
+        vitePluginImportus([
+            {
+                libraryName: 'antd',
+                libraryDirectory: 'es',
+                style: 'index',
+            },
+        ]),
+        UnoCSS(),
     ],
 })

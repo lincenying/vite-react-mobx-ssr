@@ -1,9 +1,12 @@
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import type { PrefetchContext } from './App'
-import { App, prefetch } from './App'
+
 import { createRoutes } from './routes'
 import { createStore } from './store'
+
+import { App, prefetch } from './App'
+import type { PrefetchContext } from './App'
+
 import './styles/index.scss'
 
 const container = document.getElementById('root')
@@ -36,8 +39,6 @@ else {
     )
 }
 
-hydrateRoot(container!,
-    <BrowserRouter>
+hydrateRoot(container!, (<BrowserRouter>
         <App store={store} routes={routes}/>
-    </BrowserRouter>,
-)
+    </BrowserRouter>))

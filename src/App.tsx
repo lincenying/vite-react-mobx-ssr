@@ -9,9 +9,9 @@ export function App({ store, routes }: { store: AppStore; routes: AppRoutes }) {
         <>
             <RootContext.Provider value={store}>
                 <Routes>
-                    {routes.map(({ path, component: RouteComp }) => (
-                        <Route key={path} path={path} element={<RouteComp />} />
-                    ))}
+                    {
+                        routes.map(({ path, component: RouteComp }) => (<Route key={path} path={path} element={<RouteComp />} />))
+                    }
                 </Routes>
             </RootContext.Provider>
         </>
