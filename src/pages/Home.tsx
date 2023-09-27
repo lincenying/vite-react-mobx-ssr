@@ -1,3 +1,4 @@
+import Button from 'antd/lib/button'
 import { useStore } from '@/store'
 import type { PrefetchContext } from '@/App'
 
@@ -19,10 +20,10 @@ const Home = observer(() => {
 
     return (
         <div>
-            <button onClick={() => navigate('/about?key=about')}>about</button>
+            <Button onClick={() => navigate('/about?key=about')} type="primary">About Button</Button>
             {
                 store.lists.data.map((item) => {
-                    return <div key={item.c_id}>{ item.c_title}</div>
+                    return <div key={item.c_id} className="text-16px">{ item.c_title}</div>
                 })
             }
         </div>

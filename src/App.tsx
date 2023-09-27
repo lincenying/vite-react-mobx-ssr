@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express'
 import { Route, Routes } from 'react-router-dom'
+
 import type { AppRoutes } from './routes'
 import type { AppStore } from './store'
 import { RootContext } from './store'

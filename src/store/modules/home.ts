@@ -28,7 +28,7 @@ export class HomeStore implements PrefetchStore<ArticleStore> {
         $api = $api || api
         if (this.lists.data.length > 0 && config.path === this.lists.path && config.page === 1)
             return
-        const { code, data } = await $api.get<ResDataLists<Article>>('article/lists', { ...config, cache: true, perPage: 30 })
+        const { code, data } = await $api.get<ResDataLists<Article>>('/article/lists', { ...config, cache: true, perPage: 30 })
 
         if (data && code === 200) {
             let _data: Article[]

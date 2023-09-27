@@ -1,46 +1,49 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /// <reference types="vite/client" />
 
 declare interface Window {
     __PREFETCHED_STATE__: any
-  }
+}
 
-  interface ImportMetaEnv {
+interface ImportMetaEnv {
     readonly VITE_SERVER_URL: string
-  }
+}
 
-  interface ImportMeta {
+interface ImportMeta {
     readonly env: ImportMetaEnv
-  }
-
-
-/* eslint-disable no-unused-vars */
+}
 
 /**
- * Null 或者 T
+ * Null 或者 Undefined 或者 T
  */
-declare type Nullable<T> = T | null
+declare type Nullable<T> = T | null | undefined
 /**
  * 非 Null 类型
  */
 declare type NonNullable<T> = T extends null | undefined ? never : T
 /**
- * Undefined 或者 T
+ * 数组<T> 或者 T
  */
-declare type UnfAble<T> = T | undefined
+declare type Arrayable<T> = T | T[]
 /**
  * 键为字符串, 值为 Any 的对象
  */
 declare type Obj = Record<string, any>
-
 /**
  * 键为字符串, 值为 T 的对象
  */
 declare type ObjT<T> = Record<string, T>
-
-declare type AnyFn = (...args: any[]) => any;
-declare type PromiseFn = (...args: any[]) => Promise<void>;
-
+/**
+ * Function
+ */
+declare type Fn<T = void> = () => T
+/**
+ * 任意函数
+ */
+declare type AnyFn<T = any> = (...args: any[]) => T
+/**
+ * Promise, or maybe not
+ */
+declare type Awaitable<T> = T | PromiseLike<T>
 
 declare interface ResDataLists<T> {
     data: T[]

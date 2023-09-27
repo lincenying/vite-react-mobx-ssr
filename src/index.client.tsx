@@ -1,5 +1,6 @@
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
+import { StyleProvider } from '@ant-design/cssinjs'
 
 import { createRoutes } from './routes'
 import { createStore } from './store'
@@ -7,6 +8,8 @@ import { createStore } from './store'
 import { App, prefetch } from './App'
 import type { PrefetchContext } from './App'
 
+import '@unocss/reset/tailwind.css'
+import 'uno.css'
 import './styles/index.scss'
 
 const container = document.getElementById('root')
@@ -39,6 +42,8 @@ else {
     )
 }
 
-hydrateRoot(container!, (<BrowserRouter>
+hydrateRoot(container!, (<StyleProvider hashPriority="high">
+    <BrowserRouter>
         <App store={store} routes={routes}/>
-    </BrowserRouter>))
+    </BrowserRouter>
+</StyleProvider>))

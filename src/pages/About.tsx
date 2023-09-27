@@ -1,3 +1,4 @@
+import Button from 'antd/lib/button/button'
 import { useStore } from '@/store'
 
 const About = observer(() => {
@@ -10,9 +11,9 @@ const About = observer(() => {
 
     return (
         <div>
-            <button onClick={() => navigate('/?key=home')}>home</button>
+            <Button onClick={() => navigate('/?key=home')}>Home</Button>
             <div>
-                <button onClick={() => store.increment()}>{store.count}</button>
+                <Button onClick={() => store.increment()}>{store.count}</Button>
             </div>
         </div>
     )

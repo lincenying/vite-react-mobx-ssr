@@ -46,7 +46,7 @@ export default defineConfig((c) => {
             disableHostCheck: true,
             proxy: {
                 '/api': {
-                    target: 'https://api.mmxiaowu.com',
+                    target: 'https://php.mmxiaowu.com',
                     changeOrigin: true,
                     rewrite: (path: string) => path.replace(/^\/api/, '/api'),
                 },
