@@ -40,6 +40,8 @@ declare type Fn<T = void> = () => T
  * 任意函数
  */
 declare type AnyFn<T = any> = (...args: any[]) => T
+
+declare type PromiseFn<T = any> = (...args: any[]) => Promise<T>
 /**
  * Promise, or maybe not
  */
@@ -64,22 +66,23 @@ declare interface ResDataLists<T> {
  * }
  * ```
  */
-declare interface ResponseData<T> {
+declare interface ResData<T> {
     data: T
     code: number
     message: string
     info?: string
     [propName: string]: any
 }
+
 declare interface ApiClient {
-    get<T = void>(url: string, params: Obj, headers?: Obj): Promise<ResponseData<T>>
-    post<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResponseData<T>>
-    file<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResponseData<T>>
+    get<T = void>(url: string, params: Obj, headers?: Obj): Promise<ResData<T>>
+    post<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResData<T>>
+    file<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResData<T>>
 }
 
 declare interface ApiServer {
-    get<T = void>(url: string, params: Obj, headers?: Obj): Promise<ResponseData<T>>
-    post<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResponseData<T>>
+    get<T = void>(url: string, params: Obj, headers?: Obj): Promise<ResData<T>>
+    post<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResData<T>>
     cookies: ObjT<string>
     api: import('axios').AxiosInstance
     getCookies: () => ObjT<string>

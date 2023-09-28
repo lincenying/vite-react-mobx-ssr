@@ -5,17 +5,15 @@ import type { AppRoutes } from './routes'
 import type { AppStore } from './store'
 import { RootContext } from './store'
 
-export function App({ store, routes }: { store: AppStore; routes: AppRoutes }) {
+export function App({ store, routes }: { readonly store: AppStore; readonly routes: AppRoutes }) {
     return (
-        <>
-            <RootContext.Provider value={store}>
-                <Routes>
-                    {
-                        routes.map(({ path, component: RouteComp }) => (<Route key={path} path={path} element={<RouteComp />} />))
+        <RootContext.Provider value={store}>
+            <Routes>
+                {
+                        routes.map(({ path, component: RouteComp }) => (<Route element={<RouteComp />} key={path} path={path} />))
                     }
-                </Routes>
-            </RootContext.Provider>
-        </>
+            </Routes>
+        </RootContext.Provider>
     )
 }
 

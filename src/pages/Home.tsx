@@ -23,7 +23,7 @@ const Home = observer(() => {
             <Button onClick={() => navigate('/about?key=about')} type="primary">About Button</Button>
             {
                 store.lists.data.map((item) => {
-                    return <div key={item.c_id} className="text-16px">{ item.c_title}</div>
+                    return <div className="text-16px" key={item.c_id}>{ item.c_title}</div>
                 })
             }
         </div>
