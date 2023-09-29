@@ -3,11 +3,9 @@ import { LRUCache } from 'lru-cache'
 import apiDomain from './url.js'
 
 const needCached = false
-const cached = needCached
-    ? new LRUCache<string, any>({
-        max: 1000,
-    })
-    : null
+const cached = needCached ? new LRUCache<string, any>({
+    max: 1000,
+}) : null
 
 const config = {
     api: `${apiDomain}/api/`,

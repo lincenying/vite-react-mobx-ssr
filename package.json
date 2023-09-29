@@ -11,8 +11,8 @@
     "build:serverEntry": "vite build --mode production --config config/vite.serverEntry.ts",
     "build": "npm run clean & npm run build:prod && npm run build:server && npm run build:serverEntry",
     "start": "node ./dist/index.js",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-    "lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "lint:css": "stylelint \"**/*.{css,scss,sass}\" --fix",
     "lint:ts": "tsc --noEmit"
   },
