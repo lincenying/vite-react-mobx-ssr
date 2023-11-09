@@ -1,7 +1,7 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import type { AppStore, PrefetchStore } from '..'
 import api from '@/api/index-client'
-import type { Article, ArticleStore } from '@/types'
+import type { Article, ArticleStore, ListConfig } from '@/types'
 
 export class HomeStore implements PrefetchStore<ArticleStore> {
     lists: ArticleStore['lists'] = {
@@ -24,7 +24,7 @@ export class HomeStore implements PrefetchStore<ArticleStore> {
         this.root = root
     }
 
-    async getArticleList(config: Obj = {}, $api?: ApiServer | ApiClient) {
+    async getArticleList(config: ListConfig, $api?: ApiServer | ApiClient) {
         $api = $api || api
         if (this.lists.data.length > 0 && config.path === this.lists.path && config.page === 1)
             return
@@ -33,16 +33,16 @@ export class HomeStore implements PrefetchStore<ArticleStore> {
         if (data && code === 200) {
             let _data: Article[]
             if (config.page === 1)
-                _data = [...data.data]
+                _data = [...data.list]
             else
-                _data = this.lists.data.concat(data.data)
+                _data = this.lists.data.concat(data.list)
 
             runInAction(() => {
                 this.lists = {
                     data: _data,
-                    hasNext: data.current_page < data.last_page ? 0 : 1,
-                    hasPrev: data.current_page > 1 ? 1 : 0,
-                    page: data.current_page,
+                    hasNext: data.hasNext,
+                    hasPrev: data.hasPrev,
+                    page: config.page || 1,
                     path: config.path,
                 }
             })

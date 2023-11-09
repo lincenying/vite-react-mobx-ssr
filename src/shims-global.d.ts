@@ -48,11 +48,10 @@ declare type PromiseFn<T = any> = (...args: any[]) => Promise<T>
 declare type Awaitable<T> = T | PromiseLike<T>
 
 declare interface ResDataLists<T> {
-    data: T[]
-    current_page: number
-    last_page: number
-    per_page: number
+    hasNext: number | boolean
+    hasPrev: number | boolean
     total: number
+    list: T[]
 }
 
 /**

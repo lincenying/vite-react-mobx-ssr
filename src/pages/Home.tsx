@@ -13,7 +13,7 @@ const Home = observer(() => {
     const store = useStore('home')
     useMount(async () => {
         if (store.lists.data.length === 0)
-            await store.getArticleList()
+            await store.getArticleList({ page: 1 })
     })
 
     const navigate = useNavigate()

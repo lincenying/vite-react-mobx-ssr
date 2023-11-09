@@ -5,8 +5,8 @@ export interface anyArray {
 export type Fn = (...args: any[]) => void
 
 export interface ListConfig {
-    hasNext?: number
-    hasPrev?: number
+    hasNext?: number | boolean
+    hasPrev?: number | boolean
     path?: string
     page: number
     [propName: string]: any
