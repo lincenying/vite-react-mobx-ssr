@@ -10,7 +10,13 @@ export function App({ store, routes }: { readonly store: AppStore; readonly rout
         <RootContext.Provider value={store}>
             <Routes>
                 {
-                    routes.map(({ path, component: RouteComp }) => (<Route element={<RouteComp />} key={path} path={path} />))
+                    routes.map(({ path, component: RouteComp }) => (
+                        <Route
+                            element={<RouteComp />}
+                            key={path}
+                            path={path}
+                        />
+                    ))
                 }
             </Routes>
         </RootContext.Provider>

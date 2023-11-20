@@ -45,7 +45,10 @@ else {
 hydrateRoot(container!, (
     <StyleProvider hashPriority="high">
         <BrowserRouter>
-            <App routes={routes} store={store} />
+            <App
+                routes={routes}
+                store={store}
+            />
         </BrowserRouter>
     </StyleProvider>
 ))
