@@ -1,7 +1,6 @@
 import { readFile } from 'node:fs/promises'
 
 import lincy from '@lincy/eslint-config'
-import plugin from '@unocss/eslint-plugin'
 
 const autoImport = JSON.parse(
     await readFile(new URL('./.eslintrc-auto-import.json', import.meta.url)),
@@ -10,23 +9,18 @@ const autoImport = JSON.parse(
 const config = lincy(
     {
         vue: false,
+        unocss: true,
         overrides: {
             stylistic: {
                 'antfu/consistent-list-newline': 'off',
+            },
+            react: {
+                'react-refresh/only-export-components': 'off',
             },
             ignores: [
                 '**/assets',
                 '**/static',
             ],
-        },
-    },
-    {
-        plugins: {
-            '@unocss': plugin,
-        },
-        rules: {
-            ...plugin.configs.recommended.rules,
-            '@unocss/order': 'off',
         },
     },
     {

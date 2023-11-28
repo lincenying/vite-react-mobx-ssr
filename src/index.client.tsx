@@ -8,7 +8,6 @@ import { createStore } from './store'
 import { App, prefetch } from './App'
 import type { PrefetchContext } from './App'
 
-import '@unocss/reset/tailwind.css'
 import 'uno.css'
 import './styles/index.scss'
 
