@@ -3,7 +3,6 @@ import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
-import vitePluginImportus from 'vite-plugin-importus'
 
 import postcssNormalize from 'postcss-normalize'
 import flexbugsFixes from 'postcss-flexbugs-fixes'
@@ -31,6 +30,9 @@ export default ({ mode }: ConfigEnv) => ({
         alias: {
             '@': paths.src,
         },
+    },
+    legacy: {
+        proxySsrExternalModules: true,
     },
     css: {
         postcss: {
@@ -73,13 +75,6 @@ export default ({ mode }: ConfigEnv) => ({
             defaultExportByFilename: false,
             vueTemplate: false,
         }),
-        vitePluginImportus([
-            {
-                libraryName: 'antd',
-                libraryDirectory: 'es',
-                style: 'index',
-            },
-        ]),
         UnoCSS(),
     ],
 })

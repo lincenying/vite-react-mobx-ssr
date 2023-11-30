@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ESNext",
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "lib": ["DOM", "ESNext"],
     "baseUrl": ".",
     "module": "ESNext",
@@ -10,17 +10,16 @@
       "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["node", "vite/client"],
+    "types": ["vite/client"],
     "allowJs": true,
     "strict": true,
     "strictNullChecks": true,
     "noUnusedLocals": true,
     "importHelpers": true,
-    "outDir": "dist",
+    "outDir": "build",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true
   },
-  "include": ["src/**/*"],
   "exclude": ["node_modules", "dist/**/*", "public/**/*"]
 }

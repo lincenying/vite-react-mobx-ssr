@@ -1,6 +1,5 @@
 import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { StyleProvider } from '@ant-design/cssinjs'
 
 import { createRoutes } from './routes'
 import { createStore } from './store'
@@ -42,12 +41,10 @@ else {
 }
 
 hydrateRoot(container!, (
-    <StyleProvider hashPriority="high">
-        <BrowserRouter>
-            <App
-                routes={routes}
-                store={store}
-            />
-        </BrowserRouter>
-    </StyleProvider>
+    <BrowserRouter>
+        <App
+            routes={routes}
+            store={store}
+        />
+    </BrowserRouter>
 ))

@@ -14,7 +14,8 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:css": "stylelint \"**/*.{css,scss,sass}\" --fix",
-    "lint:ts": "tsc --noEmit"
+    "lint:ts": "tsc --noEmit",
+    "antd": "ts-node --project ./tsconfig.node.json ./scripts/genAntdCss.tsx"
   },
   "dependencies": {
     "@ant-design/cssinjs": "1.18.0-alpha.5",
@@ -31,13 +32,15 @@
     "serialize-javascript": "^6.0.1"
   },
   "devDependencies": {
+    "@ant-design/static-style-extract": "^1.0.2",
     "@lincy/base-config": "^1.0.1",
-    "@lincy/eslint-config": "^4.1.0",
+    "@lincy/eslint-config": "^4.1.1",
     "@lincy/eslint-config-react": "^2.5.4",
+    "@lincy/static-style-extract": "^1.0.3",
     "@lincy/stylelint-config": "^1.15.10",
     "@lincy/vite-plugin-mock": "^3.0.0",
     "@types/express": "^4.17.21",
-    "@types/node": "^20.10.0",
+    "@types/node": "^20.10.1",
     "@types/postcss-flexbugs-fixes": "^5.0.3",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
@@ -46,6 +49,7 @@
     "@vitejs/plugin-legacy": "^5.2.0",
     "@vitejs/plugin-react": "^4.2.0",
     "ahooks": "^3.7.8",
+    "cross-env": "^7.0.3",
     "eslint": "^8.54.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -60,10 +64,12 @@
     "sass": "^1.69.5",
     "simple-git-hooks": "^2.9.0",
     "stylelint": "^15.11.0",
+    "ts-node": "^10.9.1",
+    "tslib": "^2.6.2",
     "typescript": "^5.3.2",
     "unocss": "^0.57.7",
     "unplugin-auto-import": "^0.17.1",
-    "vite": "^4.5.0",
+    "vite": "^5.0.4",
     "vite-plugin-importus": "^1.0.5"
   },
   "simple-git-hooks": {

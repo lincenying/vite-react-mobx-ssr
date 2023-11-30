@@ -1,6 +1,6 @@
-import Button from 'antd/lib/button'
 import { useStore } from '@/store'
 import type { PrefetchContext } from '@/App'
+import { Button } from '@/antd'
 
 export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
     return ctx.store.home.getArticleList({

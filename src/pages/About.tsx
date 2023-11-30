@@ -1,4 +1,4 @@
-import Button from 'antd/lib/button/button'
+import { Button } from '@/antd'
 import { useStore } from '@/store'
 
 const About = observer(() => {
