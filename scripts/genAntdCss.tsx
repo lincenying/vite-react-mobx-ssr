@@ -8,7 +8,7 @@ import * as antd from '../src/antd'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export function doExtraStyle() {
-    const baseDir = path.resolve(__dirname, '../public/static/css')
+    const baseDir = path.resolve(__dirname, './static/css')
 
     const dir = 'antd'
 
