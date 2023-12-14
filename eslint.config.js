@@ -10,6 +10,7 @@ const config = lincy(
     {
         vue: false,
         unocss: true,
+        formatters: true,
         overrides: {
             stylistic: {
                 'antfu/consistent-list-newline': 'off',

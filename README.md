@@ -2,11 +2,11 @@
 
 ## Usage
 
-+ dev: `pnpm serve`
+-   dev: `pnpm serve`
 
-+ build: `pnpm build`
+-   build: `pnpm build`
 
-+ start: `pnpm start`
+-   start: `pnpm start`
 
 ## Project Detail
 
