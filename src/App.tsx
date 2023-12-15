@@ -9,15 +9,9 @@ export function App({ store, routes }: { readonly store: AppStore; readonly rout
     return (
         <RootContext.Provider value={store}>
             <Routes>
-                {
-                    routes.map(({ path, component: RouteComp }) => (
-                        <Route
-                            element={<RouteComp />}
-                            key={path}
-                            path={path}
-                        />
-                    ))
-                }
+                {routes.map(({ path, component: RouteComp }) => (
+                    <Route element={<RouteComp />} key={path} path={path} />
+                ))}
             </Routes>
         </RootContext.Provider>
     )
@@ -34,10 +28,7 @@ export interface RenderContext {
     params?: ObjT<string>
 }
 
-export type PrefetchContext = Omit<
-    Required<RenderContext>,
-    'req' | 'res' | 'template' | 'html' | 'api'
-> & { req: { originalUrl: string }; api?: ApiServer | ApiClient }
+export type PrefetchContext = Omit<Required<RenderContext>, 'req' | 'res' | 'template' | 'html' | 'api'> & { req: { originalUrl: string }; api?: ApiServer | ApiClient }
 
 export function prefetch(ctx: PrefetchContext, type: 'server' | 'client') {
     const matched = ctx.routes.filter((each) => {

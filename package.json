@@ -5,12 +5,13 @@
   "scripts": {
     "prepare": "sh simple-git-hooks.sh",
     "clean": "rm -rf ./dist",
-    "serve": "vite --mode development --config config/vite.dev.ts",
-    "build:prod": "vite build --mode production --config config/vite.prod.ts",
-    "build:server": "vite build --mode production --config config/vite.server.ts",
-    "build:serverEntry": "vite build --mode production --config config/vite.serverEntry.ts",
-    "build": "npm run clean & npm run build:prod && npm run build:server && npm run build:serverEntry",
-    "start": "node ./dist/index.js",
+    "serve": "vite --mode development --config vite.config.dev.ts",
+    "build:prod": "vite build --mode production --config vite.config.prod.ts",
+    "build:server": "vite build --mode production --config vite.config.server.ts",
+    "build:node": "vite build --mode production --config vite.config.node.ts",
+    "build:css": "tsx creatAntdCss.ts",
+    "build": "npm run clean & npm run build:prod && npm run build:server && npm run build:node && npm run build:css",
+    "start": "node ./dist/server.js",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:css": "stylelint \"**/*.{css,scss,sass}\" --fix",
@@ -34,7 +35,7 @@
     "@lincy/base-config": "^1.0.1",
     "@lincy/eslint-config": "^4.2.3",
     "@lincy/static-style-extract": "^1.0.5",
-    "@lincy/stylelint-config": "^1.17.2",
+    "@lincy/stylelint-config": "^1.17.3",
     "@lincy/vite-plugin-mock": "^3.0.0",
     "@types/express": "^4.17.21",
     "@types/node": "^20.10.4",
@@ -61,10 +62,11 @@
     "sass": "^1.69.5",
     "simple-git-hooks": "^2.9.0",
     "stylelint": "^16.0.2",
+    "tsx": "^4.6.2",
     "typescript": "^5.3.3",
     "unocss": "^0.58.0",
     "unplugin-auto-import": "^0.17.2",
-    "vite": "^5.0.8"
+    "vite": "^5.0.9"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"

@@ -1,7 +1,1 @@
-import { Button, Input, Radio } from 'antd'
-
-export {
-    Button,
-    Input,
-    Radio,
-}
+export { Button, Input, Radio } from 'antd'

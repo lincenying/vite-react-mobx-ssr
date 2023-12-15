@@ -10,7 +10,7 @@ export interface PrefetchStore<State> {
 }
 
 type PickKeys<T> = {
-    [K in keyof T]: T[K] extends PrefetchStore<unknown> ? K : never;
+    [K in keyof T]: T[K] extends PrefetchStore<unknown> ? K : never
 }[keyof T]
 
 export class AppStore {

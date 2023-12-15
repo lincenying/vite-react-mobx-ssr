@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
-import pkg from '../package.json'
-import { paths } from './vite.common'
+import pkg from './package.json'
+import { paths } from './vite.config'
 
 // use vite as cjs bundler
 export default defineConfig(() => ({

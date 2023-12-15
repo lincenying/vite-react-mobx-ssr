@@ -15,9 +15,11 @@ export async function createServer() {
     const indexServer = (await import(path.join(__dirname, 'index.server.js'))) as { render: RenderFn }
     const template = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf-8')
 
-    server.use(express.static(__dirname, {
-        index: false,
-    }))
+    server.use(
+        express.static(__dirname, {
+            index: false,
+        }),
+    )
 
     server.get(/^\/api\//, (_, res) => {
         res.send('react and vite!')

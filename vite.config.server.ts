@@ -1,8 +1,8 @@
 import { defineConfig } from 'vite'
-import base, { paths } from './vite.common'
+import baseConfig, { paths } from './vite.config'
 
-export default defineConfig((c) => {
-    const config = base(c)
+export default defineConfig((configEnv) => {
+    const config = baseConfig(configEnv)
 
     return {
         ...config,

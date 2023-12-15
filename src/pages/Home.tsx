@@ -3,10 +3,13 @@ import type { PrefetchContext } from '@/App'
 import { Button } from '@/antd'
 
 export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
-    return ctx.store.home.getArticleList({
-        page: 1,
-        path: ctx.req.originalUrl.split('?')[0],
-    }, ctx.api)
+    return ctx.store.home.getArticleList(
+        {
+            page: 1,
+            path: ctx.req.originalUrl.split('?')[0],
+        },
+        ctx.api,
+    )
 }
 
 const Home = observer(() => {
@@ -20,24 +23,16 @@ const Home = observer(() => {
 
     return (
         <div>
-            <Button
-                onClick={() => navigate('/about?key=about')}
-                type="primary"
-            >
+            <Button onClick={() => navigate('/about?key=about')} type="primary">
                 About Button
             </Button>
-            {
-                store.lists.data.map((item) => {
-                    return (
-                        <div
-                            className="text-16px"
-                            key={item.c_id}
-                        >
-                            { item.c_title}
-                        </div>
-                    )
-                })
-            }
+            {store.lists.data.map((item) => {
+                return (
+                    <div className="text-16px" key={item.c_id}>
+                        {item.c_title}
+                    </div>
+                )
+            })}
         </div>
     )
 })

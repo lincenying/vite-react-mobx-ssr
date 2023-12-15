@@ -1,10 +1,10 @@
 import { defineConfig } from 'vite'
 
 import legacy from '@vitejs/plugin-legacy'
-import base from './vite.common'
+import baseConfig from './vite.config'
 
-export default defineConfig((c) => {
-    const config = base(c)
+export default defineConfig((configEnv) => {
+    const config = baseConfig(configEnv)
     return {
         ...config,
         build: {

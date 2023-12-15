@@ -13,12 +13,12 @@ import type { ConfigEnv } from 'vite'
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 export const paths = {
-    src: path.resolve(__dirname, '..', 'src'),
+    src: path.resolve(__dirname, '.', 'src'),
     dist: path.resolve(__dirname, '..', 'dist'),
-    template: path.resolve(__dirname, '..', 'index.html'),
-    server: path.resolve(__dirname, '..', 'src/server/index.ts'), // 服务端代码入口
-    serverEntry: path.resolve(__dirname, '..', 'src/index.server.tsx'), // 服务端同构应用入口
-    serverOutput: path.resolve(__dirname, '..', 'dist/server.js'),
+    template: path.resolve(__dirname, '.', 'index.html'),
+    server: path.resolve(__dirname, '.', 'src/server.ts'), // 服务端代码入口
+    serverEntry: path.resolve(__dirname, '.', 'src/index.server.tsx'), // 服务端同构应用入口
+    serverOutput: path.resolve(__dirname, '.', 'dist/server.js'),
 }
 
 export default ({ mode }: ConfigEnv) => ({

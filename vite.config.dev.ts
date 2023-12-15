@@ -3,7 +3,7 @@ import type { ViteDevServer } from 'vite'
 import { defineConfig } from 'vite'
 import { viteMockServe } from '@lincy/vite-plugin-mock'
 
-import base, { paths } from './vite.common'
+import baseConfig, { paths } from './vite.config'
 
 function devSSR() {
     return {
@@ -13,29 +13,30 @@ function devSSR() {
             const templateHtml = fs.readFileSync(paths.template, 'utf-8')
 
             // 缺点是不能调试完整服务端代码，只能调试服务端同构应用的部分
-            return () => vite.middlewares.use(async (req, res, next) => {
-                try {
-                    const { render } = (await vite.ssrLoadModule(paths.serverEntry))
-                    const template = await vite.transformIndexHtml(req.originalUrl!, templateHtml)
-                    const { html } = (await render({ req, res, template }))
+            return () =>
+                vite.middlewares.use(async (req, res, next) => {
+                    try {
+                        const { render } = await vite.ssrLoadModule(paths.serverEntry)
+                        const template = await vite.transformIndexHtml(req.originalUrl!, templateHtml)
+                        const { html } = await render({ req, res, template })
 
-                    res.end(html)
-                }
-                catch (e: unknown) {
-                    if (e instanceof Error) {
-                        vite.ssrFixStacktrace(e)
-                        const errorMessage = e.stack ?? e.message
-                        logger.error(errorMessage)
-                        next()
+                        res.end(html)
                     }
-                }
-            })
+                    catch (e: unknown) {
+                        if (e instanceof Error) {
+                            vite.ssrFixStacktrace(e)
+                            const errorMessage = e.stack ?? e.message
+                            logger.error(errorMessage)
+                            next()
+                        }
+                    }
+                })
         },
     }
 }
 
-export default defineConfig((c) => {
-    const config = base(c)
+export default defineConfig((configEnv) => {
+    const config = baseConfig(configEnv)
     const localMock = true
     return {
         ...config,
@@ -56,7 +57,7 @@ export default defineConfig((c) => {
             ...(config.plugins || []),
             viteMockServe({
                 mockPath: 'mock',
-                enable: c.command === 'serve' && localMock,
+                enable: configEnv.command === 'serve' && localMock,
                 logger: true,
             }),
             devSSR(),

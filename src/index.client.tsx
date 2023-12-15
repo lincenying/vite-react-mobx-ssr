@@ -29,9 +29,7 @@ else {
         store,
         req: { originalUrl: window.location.pathname },
         api: undefined,
-        params: Object.fromEntries(
-            new URLSearchParams(window.location.search),
-        ),
+        params: Object.fromEntries(new URLSearchParams(window.location.search)),
     }
     // fallback to client prefetch
     prefetch(ctx, 'client').then(
@@ -40,11 +38,9 @@ else {
     )
 }
 
-hydrateRoot(container!, (
+hydrateRoot(
+    container!,
     <BrowserRouter>
-        <App
-            routes={routes}
-            store={store}
-        />
-    </BrowserRouter>
-))
+        <App routes={routes} store={store} />
+    </BrowserRouter>,
+)

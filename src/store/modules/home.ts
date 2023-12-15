@@ -34,8 +34,7 @@ export class HomeStore implements PrefetchStore<ArticleStore> {
             let _data: Article[]
             if (config.page === 1)
                 _data = [...data.list]
-            else
-                _data = this.lists.data.concat(data.list)
+            else _data = this.lists.data.concat(data.list)
 
             runInAction(() => {
                 this.lists = {
