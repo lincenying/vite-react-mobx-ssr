@@ -1,6 +1,7 @@
 {
   "name": "vite-react-mobx-ssr",
   "type": "module",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "prepare": "sh simple-git-hooks.sh",

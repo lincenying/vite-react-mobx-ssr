@@ -6,9 +6,8 @@ import AutoImport from 'unplugin-auto-import/vite'
 
 import postcssNormalize from 'postcss-normalize'
 import flexbugsFixes from 'postcss-flexbugs-fixes'
-import presetEnv from 'postcss-preset-env'
 
-import type { ConfigEnv } from 'vite'
+import { type ConfigEnv, defineConfig } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -21,7 +20,7 @@ export const paths = {
     serverOutput: path.resolve(__dirname, '.', 'dist/server.js'),
 }
 
-export default ({ mode }: ConfigEnv) => ({
+export default defineConfig(({ mode }: ConfigEnv) => ({
     build: {
         sourcemap: true,
         emptyOutDir: false,
@@ -38,12 +37,6 @@ export default ({ mode }: ConfigEnv) => ({
         postcss: {
             plugins: [
                 flexbugsFixes,
-                presetEnv({
-                    autoprefixer: {
-                        flexbox: 'no-2009',
-                    },
-                    stage: 3,
-                }),
                 postcssNormalize(),
             ],
         },
@@ -77,4 +70,4 @@ export default ({ mode }: ConfigEnv) => ({
         }),
         UnoCSS(),
     ],
-})
+}))

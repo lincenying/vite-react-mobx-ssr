@@ -14,9 +14,9 @@ const routes = Object.keys(pages).map((path) => {
     return {
         name,
         path: pathname,
-        component: (pages[path] as Obj).default as () => JSX.Element,
+        component: (pages[path] as Objable).default as () => JSX.Element,
         // 在组件文件中定义的SSR预取钩子
-        prefetch: (pages[path] as Obj).prefetch as PromiseFn,
+        prefetch: (pages[path] as Objable).prefetch as PromiseFn,
     }
 })
 

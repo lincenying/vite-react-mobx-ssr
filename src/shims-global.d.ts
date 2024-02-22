@@ -27,7 +27,7 @@ declare type Arrayable<T> = T | T[]
 /**
  * 键为字符串, 值为 Any 的对象
  */
-declare type Obj<T = any> = Record<string, T>
+declare type Objable<T = any> = Record<string, T>
 /**
  * Function
  */
@@ -70,17 +70,17 @@ declare interface ResData<T> {
 }
 
 declare interface ApiClient {
-    get<T = void>(url: string, params: Obj, headers?: Obj): Promise<ResData<T>>
-    post<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResData<T>>
-    file<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResData<T>>
+    get<T = void>(url: string, params: Objable, headers?: Objable): Promise<ResData<T>>
+    post<T = void>(url: string, data: Objable, headers?: Objable): Promise<ResData<T>>
+    file<T = void>(url: string, data: Objable, headers?: Objable): Promise<ResData<T>>
 }
 
 declare interface ApiServer {
-    get<T = void>(url: string, params: Obj, headers?: Obj): Promise<ResData<T>>
-    post<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResData<T>>
-    cookies: Obj<string>
+    get<T = void>(url: string, params: Objable, headers?: Objable): Promise<ResData<T>>
+    post<T = void>(url: string, data: Objable, headers?: Objable): Promise<ResData<T>>
+    cookies: Objable<string>
     api: import('axios').AxiosInstance
-    getCookies: () => Obj<string>
+    getCookies: () => Objable<string>
 }
 
 declare interface asyncDataConfig {

@@ -20,7 +20,7 @@ if (window.__PREFETCHED_STATE__) {
         console.log('prefetched state', window.__PREFETCHED_STATE__)
 
     // 合并SSR预取数据
-    store.hydrate(window.__PREFETCHED_STATE__ as Obj)
+    store.hydrate(window.__PREFETCHED_STATE__ as Objable)
     delete window.__PREFETCHED_STATE__
 }
 else {
