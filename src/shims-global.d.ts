@@ -27,11 +27,7 @@ declare type Arrayable<T> = T | T[]
 /**
  * 键为字符串, 值为 Any 的对象
  */
-declare type Obj = Record<string, any>
-/**
- * 键为字符串, 值为 T 的对象
- */
-declare type ObjT<T> = Record<string, T>
+declare type Obj<T = any> = Record<string, T>
 /**
  * Function
  */
@@ -82,9 +78,9 @@ declare interface ApiClient {
 declare interface ApiServer {
     get<T = void>(url: string, params: Obj, headers?: Obj): Promise<ResData<T>>
     post<T = void>(url: string, data: Obj, headers?: Obj): Promise<ResData<T>>
-    cookies: ObjT<string>
+    cookies: Obj<string>
     api: import('axios').AxiosInstance
-    getCookies: () => ObjT<string>
+    getCookies: () => Obj<string>
 }
 
 declare interface asyncDataConfig {

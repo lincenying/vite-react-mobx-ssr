@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react'
-import { HomeStore } from './modules/home'
-import { AboutStore } from './modules/about'
+import { HomeStore } from './modules/topics'
+import { ArticleStore } from './modules/article'
 
 export interface PrefetchStore<State> {
     // 合并SSR预取数据
@@ -14,12 +14,12 @@ type PickKeys<T> = {
 }[keyof T]
 
 export class AppStore {
-    home: HomeStore
-    about: AboutStore
+    topics: HomeStore
+    article: ArticleStore
 
     constructor() {
-        this.home = new HomeStore(this)
-        this.about = new AboutStore(this)
+        this.topics = new HomeStore(this)
+        this.article = new ArticleStore(this)
     }
 
     hydrate(data: Record<string, unknown>) {

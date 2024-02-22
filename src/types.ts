@@ -7,7 +7,7 @@ export type Fn = (...args: any[]) => void
 export interface ListConfig {
     hasNext?: number | boolean
     hasPrev?: number | boolean
-    path?: string
+    pathname?: string
     page: number
     [propName: string]: any
 }
@@ -15,7 +15,7 @@ export interface ListConfig {
 export interface ApiConfig {
     id?: string
     page?: number
-    path?: string
+    pathname?: string
     from?: string
     limit?: number
 }
@@ -26,16 +26,12 @@ export interface Article {
     c_content: string
 }
 
-export interface ArticleStoreList extends ListConfig {
+export interface ArticleStore extends ListConfig {
     data: Article[]
 }
 
 export interface ArticleStoreItem {
-    data: Nullable<Article>
-    path?: string
+    data: Article
+    pathname?: string
     [propName: string]: any
-}
-export interface ArticleStore {
-    lists: ArticleStoreList
-    item: ArticleStoreItem
 }

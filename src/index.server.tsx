@@ -26,7 +26,7 @@ export async function render(context: RenderContext) {
     ctx.store = store
     ctx.routes = routes
     ctx.api = api(req && req.cookies)
-    ctx.params = Object.fromEntries(new URLSearchParams(req.originalUrl.replace('/?', '?')))
+    ctx.params = Object.fromEntries(new URLSearchParams(req.originalUrl.split('?')[1]))
 
     const success = await prefetch(ctx, 'server').catch((e) => {
         console.error(e)

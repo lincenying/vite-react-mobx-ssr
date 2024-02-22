@@ -1,38 +1,80 @@
+import React, { useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router-dom'
+import { observer } from 'mobx-react-lite'
+import { useMount, useUpdateEffect } from 'ahooks'
+import ls from 'store2'
+
 import { useStore } from '@/store'
 import type { PrefetchContext } from '@/App'
-import { Button } from '@/antd'
+import { Button, List, Spin } from '@/antd'
 
 export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
-    return ctx.store.home.getArticleList(
+    return ctx.store.topics.getTopics(
         {
             page: 1,
-            path: ctx.req.originalUrl.split('?')[0],
+            limit: 20,
+            pathname: ctx.req.originalUrl.split('?')[0],
         },
         ctx.api,
     )
 }
 
 const Home = observer(() => {
-    const store = useStore('home')
-    useMount(async () => {
-        if (store.lists.data.length === 0)
-            await store.getArticleList({ page: 1 })
+    const location = useLocation()
+    const pathname = location.pathname
+
+    const topics = useStore('topics')
+
+    const firstPathname = useRef(pathname)
+    const [showMoreBtn, setShowMoreBtn] = useState(true)
+
+    useMount(() => {
+        console.log('topics componentDidMount')
+        console.log(topics.pathname, location.pathname)
+        if (topics.pathname !== location.pathname)
+            topics.getTopics({ page: 1, limit: 20, pathname })
+
+        const scrollTop = ls.get(pathname) || 0
+        ls.remove(pathname)
+        if (scrollTop)
+            window.scrollTo(0, scrollTop)
+
+        document.title = 'M.M.M 小屋'
     })
 
-    const navigate = useNavigate()
+    useUpdateEffect(() => {
+        console.log('topics componentDidUpdate')
+        console.log(firstPathname.current, pathname)
+    }, [pathname])
+
+    const handleLoadMore = async () => {
+        setShowMoreBtn(false)
+        await topics.getTopics({ page: topics.page + 1, limit: 20, pathname })
+        setShowMoreBtn(true)
+    }
+
+    const { data } = topics
 
     return (
-        <div>
-            <Button onClick={() => navigate('/about?key=about')} type="primary">
-                About Button
-            </Button>
-            {store.lists.data.map((item) => {
-                return (
-                    <div className="text-16px" key={item.c_id}>
-                        {item.c_title}
-                    </div>
-                )
-            })}
+        <div className="main">
+            <List
+                dataSource={data}
+                itemLayout="horizontal"
+                renderItem={item => (
+                    <List.Item>
+                        <List.Item.Meta title={
+                            <Link className="li-name" to={`/article/${item.c_id}`}>{item.c_title}</Link>
+                    }
+                        />
+                    </List.Item>
+                )}
+            />
+
+            <ul>
+                <li className="page">
+                    {showMoreBtn ? <Button onClick={handleLoadMore} type="primary">加载下一页</Button> : <Spin /> }
+                </li>
+            </ul>
         </div>
     )
 })

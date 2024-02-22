@@ -25,7 +25,7 @@ export interface RenderContext {
     routes?: AppRoutes
     store?: AppStore
     api?: ApiServer | ApiClient
-    params?: ObjT<string>
+    params?: Obj<string>
 }
 
 export type PrefetchContext = Omit<Required<RenderContext>, 'req' | 'res' | 'template' | 'html' | 'api'> & {
