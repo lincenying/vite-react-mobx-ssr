@@ -7,7 +7,7 @@ const routes = Object.keys(pages).map((path) => {
         name,
         path: name === 'Home' ? '/' : `/${name.toLowerCase()}`,
         component: (pages[path] as Obj).default as () => JSX.Element,
-        // ssr prefetch hook defined in component fil
+        // 在组件文件中定义的SSR预取钩子
         prefetch: (pages[path] as Obj).prefetch as PromiseFn,
     }
 })

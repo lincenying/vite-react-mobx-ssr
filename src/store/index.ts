@@ -3,9 +3,9 @@ import { HomeStore } from './modules/home'
 import { AboutStore } from './modules/about'
 
 export interface PrefetchStore<State> {
-    // merge ssr prefetched data
+    // 合并SSR预取数据
     hydrate(state: State): void
-    // provide ssr prefetched data
+    // 提供SSR预取数据
     dehydra(): State | undefined
 }
 

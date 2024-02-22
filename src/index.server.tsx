@@ -39,7 +39,7 @@ export async function render(context: RenderContext) {
         </StaticRouter>,
     )
 
-    // state avaliable now
+    // 状态现在可用
     const state = success ? store.dehydra() : undefined
 
     ctx.html = ctx.template.replace(APP_HTML, html).replace(APP_STATE, serialize(state))

@@ -19,7 +19,7 @@ if (window.__PREFETCHED_STATE__) {
     if (import.meta.env.DEV)
         console.log('prefetched state', window.__PREFETCHED_STATE__)
 
-    // merge ssr prefetched data
+    // 合并SSR预取数据
     store.hydrate(window.__PREFETCHED_STATE__ as Obj)
     delete window.__PREFETCHED_STATE__
 }
@@ -31,7 +31,7 @@ else {
         api: undefined,
         params: Object.fromEntries(new URLSearchParams(window.location.search)),
     }
-    // fallback to client prefetch
+    // 回退到客户端预取
     prefetch(ctx, 'client').then(
         () => {},
         () => {},

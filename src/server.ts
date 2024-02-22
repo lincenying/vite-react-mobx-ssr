@@ -5,7 +5,7 @@ import express from 'express'
 
 type RenderFn = (...args: any[]) => Promise<{ html: string }>
 
-// hypothesis: client assets to be in the same directory
+// 假设:客户端文件在同一目录下
 export async function createServer() {
     const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
