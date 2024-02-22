@@ -41,6 +41,9 @@ dependencies:
   serialize-javascript:
     specifier: ^6.0.2
     version: 6.0.2
+  store2:
+    specifier: ^2.14.3
+    version: 2.14.3
 
 devDependencies:
   '@lincy/base-config':
@@ -8603,6 +8606,10 @@ packages:
   /statuses@2.0.1:
     resolution: {integrity: sha512-RwNA9Z/7PrK06rYLIzFMlaF+l73iwpzsqRIFgbMLbTcLD6cOao82TaWefPXQvB2fOC4AjuYSEndS7N/mTCbkdQ==}
     engines: {node: '>= 0.8'}
+    dev: false
+
+  /store2@2.14.3:
+    resolution: {integrity: sha512-4QcZ+yx7nzEFiV4BMLnr/pRa5HYzNITX2ri0Zh6sT9EyQHbBHacC6YigllUPU9X3D0f/22QCgfokpKs52YRrUg==}
     dev: false
 
   /string-argv@0.3.2:

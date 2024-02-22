@@ -29,7 +29,8 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.22.1",
     "react-router-dom": "^6.22.1",
-    "serialize-javascript": "^6.0.2"
+    "serialize-javascript": "^6.0.2",
+    "store2": "^2.14.3"
   },
   "devDependencies": {
     "@lincy/base-config": "^1.1.0",
