@@ -70,14 +70,14 @@ declare interface ResData<T> {
 }
 
 declare interface ApiClient {
-    get<T = void>(url: string, params: Objable, headers?: Objable): Promise<ResData<T>>
-    post<T = void>(url: string, data: Objable, headers?: Objable): Promise<ResData<T>>
-    file<T = void>(url: string, data: Objable, headers?: Objable): Promise<ResData<T>>
+    get: <T = void>(url: string, params: Objable, headers?: Objable) => Promise<ResData<T>>
+    post: <T = void>(url: string, data: Objable, headers?: Objable) => Promise<ResData<T>>
+    file: <T = void>(url: string, data: Objable, headers?: Objable) => Promise<ResData<T>>
 }
 
 declare interface ApiServer {
-    get<T = void>(url: string, params: Objable, headers?: Objable): Promise<ResData<T>>
-    post<T = void>(url: string, data: Objable, headers?: Objable): Promise<ResData<T>>
+    get: <T = void>(url: string, params: Objable, headers?: Objable) => Promise<ResData<T>>
+    post: <T = void>(url: string, data: Objable, headers?: Objable) => Promise<ResData<T>>
     cookies: Objable<string>
     api: import('axios').AxiosInstance
     getCookies: () => Objable<string>
