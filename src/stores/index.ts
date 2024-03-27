@@ -1,16 +1,16 @@
-import { createContext, useContext } from 'react'
+import { createContext } from 'react'
 import { HomeStore } from './modules/topics'
 import { ArticleStore } from './modules/article'
 
 export interface PrefetchStore<State> {
     // 合并SSR预取数据
-    hydrate(state: State): void
+    hydrate: (state: State) => void
     // 提供SSR预取数据
-    dehydra(): State | undefined
+    dehydra: () => State | undefined
 }
 
 type PickKeys<T> = {
-    [K in keyof T]: T[K] extends PrefetchStore<unknown> ? K : never
+    [K in keyof T]: T[K] extends PrefetchStore<any> ? K : never
 }[keyof T]
 
 export class AppStore {
@@ -50,7 +50,9 @@ export class AppStore {
 const appStore = new AppStore()
 
 export const createStore = () => appStore
+
 export const RootContext = createContext<AppStore>(appStore)
+
 export function useStore<T extends keyof AppStore>(key: T): AppStore[T] {
     const root = useContext(RootContext)
 

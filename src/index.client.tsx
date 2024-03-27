@@ -2,7 +2,7 @@ import { hydrateRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
 
 import { createRoutes } from './routes'
-import { createStore } from './store'
+import { createStore } from './stores'
 
 import { App, prefetch } from './App'
 import type { PrefetchContext } from './App'

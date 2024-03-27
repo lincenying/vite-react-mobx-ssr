@@ -2,7 +2,7 @@ import serializeJavascript from 'serialize-javascript'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
 
-import { createStore } from './store'
+import { createStore } from './stores'
 import { createRoutes } from './routes'
 import { api } from './api/index-server'
 

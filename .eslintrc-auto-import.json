@@ -117,6 +117,12 @@
     "useVirtualList": true,
     "useWebSocket": true,
     "useWhyDidYouUpdate": true,
-    "observer": true
+    "observer": true,
+    "AppStore": true,
+    "ArticleStore": true,
+    "HomeStore": true,
+    "RootContext": true,
+    "createStore": true,
+    "useStore": true
   }
 }

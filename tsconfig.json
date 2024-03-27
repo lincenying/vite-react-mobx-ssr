@@ -10,7 +10,7 @@
       "@/*": ["src/*"]
     },
     "resolveJsonModule": true,
-    "types": ["vite/client"],
+    "types": [],
     "allowJs": true,
     "strict": true,
     "strictNullChecks": true,

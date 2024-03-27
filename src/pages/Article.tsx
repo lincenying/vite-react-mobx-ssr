@@ -1,10 +1,3 @@
-import React, { useEffect, useRef } from 'react'
-import { useLocation, useParams } from 'react-router-dom'
-import { observer } from 'mobx-react-lite'
-import { useMount, useUpdateEffect } from 'ahooks'
-
-import { useStore } from '@/store'
-
 import type { PrefetchContext } from '@/App'
 import { Card, Spin } from '@/antd'
 

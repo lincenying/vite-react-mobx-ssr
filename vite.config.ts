@@ -58,11 +58,13 @@ export default defineConfig(({ mode }: ConfigEnv) => ({
                 'ahooks',
                 {
                     'mobx-react-lite': ['observer'],
-                    '@/utils': ['setMessage'],
                 },
             ],
             dts: 'src/auto-imports.d.ts',
-            dirs: [],
+            dirs: [
+                'src/stores/**',
+                'src/composables',
+            ],
 
             resolvers: [],
             defaultExportByFilename: false,
