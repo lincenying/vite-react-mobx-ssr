@@ -26,10 +26,12 @@ export class AppStore {
         Object.keys(data).forEach((key) => {
             const k = key as PickKeys<AppStore>
 
-            if (import.meta.env.DEV)
+            if (import.meta.env.DEV) {
                 console.info(`hydrate ${k}`)
-            if (this[k])
+            }
+            if (this[k]) {
                 this[k]?.hydrate?.(data[k] as any)
+            }
         })
     }
 

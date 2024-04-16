@@ -18,15 +18,19 @@ export class HomeStore implements PrefetchStore<ArticleStore> {
 
     async getTopics(config: ListConfig, $api?: ApiServer | ApiClient) {
         $api = $api || api
-        if (this.data.length > 0 && config.pathname === this.pathname && config.page === 1)
+        if (this.data.length > 0 && config.pathname === this.pathname && config.page === 1) {
             return
+        }
         const { code, data } = await $api.get<ResDataLists<Article>>('/fetch/article/lists', { ...config, cache: true })
 
         if (data && code === 200) {
             let _data: Article[]
-            if (config.page === 1)
+            if (config.page === 1) {
                 _data = [...data.list]
-            else _data = this.data.concat(data.list)
+            }
+            else {
+                _data = this.data.concat(data.list)
+            }
 
             runInAction(() => {
                 this.data = _data

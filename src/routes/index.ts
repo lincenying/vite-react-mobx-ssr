@@ -4,12 +4,15 @@ const routes = Object.keys(pages).map((path) => {
     const name = path.match(/\.\.\/pages\/(.*)\.tsx$/)![1]
 
     let pathname = ''
-    if (name === 'Article')
+    if (name === 'Article') {
         pathname = '/article/:id'
-    else if (name === 'Home')
+    }
+    else if (name === 'Home') {
         pathname = '/'
-    else
+    }
+    else {
         pathname = `/${name.toLowerCase()}`
+    }
 
     return {
         name,

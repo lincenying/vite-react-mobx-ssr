@@ -16,8 +16,9 @@ const store = createStore()
 const routes = createRoutes()
 
 if (window.__PREFETCHED_STATE__) {
-    if (import.meta.env.DEV)
+    if (import.meta.env.DEV) {
         console.log('prefetched state', window.__PREFETCHED_STATE__)
+    }
 
     // 合并SSR预取数据
     store.hydrate(window.__PREFETCHED_STATE__ as Objable)
