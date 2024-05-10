@@ -41,8 +41,9 @@ export function prefetch(ctx: PrefetchContext, type: 'server' | 'client') {
     const ps: Promise<void>[] = []
 
     matched.forEach((route) => {
-        if (typeof route.prefetch === 'function')
+        if (typeof route.prefetch === 'function') {
             ps.push(route.prefetch(ctx, type))
+        }
     })
 
     return Promise.all(ps)

@@ -11,8 +11,9 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 function doExtraStyle() {
     const outputCssPath = path.resolve(__dirname, './dist/static/css')
 
-    if (!fs.existsSync(outputCssPath))
+    if (!fs.existsSync(outputCssPath)) {
         fs.mkdirSync(outputCssPath, { recursive: true })
+    }
 
     const css = extractStyle(undefined, antd)
 

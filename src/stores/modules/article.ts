@@ -17,8 +17,9 @@ export class ArticleStore implements PrefetchStore<ArticleStoreItem> {
 
     async getArticle(config: ApiConfig, $api?: ApiServer | ApiClient) {
         $api = $api || api
-        if (config.pathname === this.pathname)
+        if (config.pathname === this.pathname) {
             return
+        }
         this.isLoad = false
         const { code, data } = await $api.get<Article>(`/fetch/article/detail`, config)
         if (code === 200) {

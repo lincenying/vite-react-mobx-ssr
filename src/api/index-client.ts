@@ -19,8 +19,9 @@ axios.interceptors.response.use(
 )
 
 function checkStatus(response: AxiosResponse) {
-    if (response && (response.status === 200 || response.status === 304))
+    if (response && (response.status === 200 || response.status === 304)) {
         return response
+    }
 
     return {
         data: {
@@ -32,10 +33,12 @@ function checkStatus(response: AxiosResponse) {
 }
 
 function checkCode(res: any) {
-    if (res.data.code === -500)
+    if (res.data.code === -500) {
         window.location.href = '/backend'
-    else if (res.data.code === -400)
+    }
+    else if (res.data.code === -400) {
         window.location.href = '/'
+    }
     // else if (res.data.code !== 200)
     //     showMsg(res.data.message)
 

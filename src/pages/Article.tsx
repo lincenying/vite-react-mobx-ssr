@@ -25,8 +25,9 @@ function PageArticle() {
     const firstPathname = useRef(pathname)
 
     useEffect(() => {
-        if (article.pathname !== pathname)
+        if (article.pathname !== pathname) {
             article.getArticle({ id, pathname })
+        }
     }, [article, id, pathname])
 
     useMount(() => {
