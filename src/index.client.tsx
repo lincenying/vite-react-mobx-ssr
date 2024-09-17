@@ -1,11 +1,11 @@
+import type { PrefetchContext } from './App'
 import { hydrateRoot } from 'react-dom/client'
+
 import { BrowserRouter } from 'react-router-dom'
+import { App, prefetch } from './App'
 
 import { createRoutes } from './routes'
 import { createStore } from './stores'
-
-import { App, prefetch } from './App'
-import type { PrefetchContext } from './App'
 
 import 'uno.css'
 import './styles/index.scss'

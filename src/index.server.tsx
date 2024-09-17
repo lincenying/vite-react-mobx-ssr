@@ -1,14 +1,14 @@
-import serializeJavascript from 'serialize-javascript'
+import type { RenderContext } from './App'
 import ReactDOMServer from 'react-dom/server'
 import { StaticRouter } from 'react-router-dom/server'
 
-import { createStore } from './stores'
-import { createRoutes } from './routes'
+import serializeJavascript from 'serialize-javascript'
 import { api } from './api/index-server'
-
 import { App, prefetch } from './App'
 
-import type { RenderContext } from './App'
+import { createRoutes } from './routes'
+
+import { createStore } from './stores'
 
 // see index.html
 const APP_HTML = '<!--app-html-->'

@@ -1,6 +1,6 @@
-import ls from 'store2'
-
 import type { PrefetchContext } from '@/App'
+
+import ls from 'store2'
 import { Button, List, Spin } from '@/antd'
 
 export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
@@ -61,7 +61,7 @@ const Home = observer(() => {
                     <List.Item>
                         <List.Item.Meta title={
                             <Link className="li-name" to={`/article/${item.c_id}`}>{item.c_title}</Link>
-                    }
+                        }
                         />
                     </List.Item>
                 )}

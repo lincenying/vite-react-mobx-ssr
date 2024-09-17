@@ -1,7 +1,7 @@
-import { makeAutoObservable, runInAction } from 'mobx'
 import type { AppStore, PrefetchStore } from '..'
+import type { Article, ArticleStore, ListConfig } from '~/types'
+import { makeAutoObservable, runInAction } from 'mobx'
 import api from '@/api/index-client'
-import type { Article, ArticleStore, ListConfig } from '@/types'
 
 export class HomeStore implements PrefetchStore<ArticleStore> {
     constructor(root: AppStore) {

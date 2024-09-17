@@ -1,13 +1,12 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
+import flexbugsFixes from 'postcss-flexbugs-fixes'
+
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 
-import postcssNormalize from 'postcss-normalize'
-import flexbugsFixes from 'postcss-flexbugs-fixes'
-
-import { type ConfigEnv, defineConfig } from 'vite'
+import { defineConfig, type UserConfig } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -20,7 +19,7 @@ export const paths = {
     serverOutput: path.resolve(__dirname, '.', 'dist/server.js'),
 }
 
-export default defineConfig(({ mode }: ConfigEnv) => ({
+export default defineConfig(({ mode }: UserConfig) => ({
     build: {
         sourcemap: true,
         emptyOutDir: false,
@@ -30,14 +29,10 @@ export default defineConfig(({ mode }: ConfigEnv) => ({
             '@': paths.src,
         },
     },
-    legacy: {
-        proxySsrExternalModules: true,
-    },
     css: {
         postcss: {
             plugins: [
                 flexbugsFixes,
-                postcssNormalize(),
             ],
         },
         devSourcemap: mode === 'development',

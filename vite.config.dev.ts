@@ -1,7 +1,7 @@
-import fs from 'node:fs'
 import type { ViteDevServer } from 'vite'
-import { defineConfig } from 'vite'
+import fs from 'node:fs'
 import { viteMockServe } from '@lincy/vite-plugin-mock'
+import { defineConfig } from 'vite'
 
 import baseConfig, { paths } from './vite.config'
 

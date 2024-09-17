@@ -31,12 +31,6 @@ const config = lincy(
             },
         },
     },
-    {
-        ignores: [
-            '**/assets',
-            '**/static',
-        ],
-    },
 )
 
 export default config

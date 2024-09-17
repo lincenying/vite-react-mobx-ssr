@@ -1,8 +1,8 @@
 import type { Request, Response } from 'express'
-import { Route, Routes } from 'react-router-dom'
-
 import type { AppRoutes } from './routes'
+
 import type { AppStore } from './stores'
+import { Route, Routes } from 'react-router-dom'
 import { RootContext } from './stores'
 
 export function App({ store, routes }: { readonly store: AppStore; readonly routes: AppRoutes }) {
