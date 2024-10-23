@@ -35,6 +35,11 @@ export default defineConfig(({ mode }: UserConfig) => ({
                 flexbugsFixes,
             ],
         },
+        preprocessorOptions: {
+            scss: {
+                api: 'modern-compiler',
+            },
+        },
         devSourcemap: mode === 'development',
     },
     plugins: [

@@ -11,7 +11,7 @@ export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
     )
 }
 
-function PageArticle() {
+const PageArticle = observer(() => {
     const navigate = useNavigate()
 
     const location = useLocation()
@@ -68,5 +68,5 @@ function PageArticle() {
             </Spin>
         </div>
     )
-}
-export default observer(PageArticle)
+})
+export default PageArticle
