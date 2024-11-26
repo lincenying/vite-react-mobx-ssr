@@ -5,7 +5,7 @@ import type { AppStore } from './stores'
 import { Route, Routes } from 'react-router-dom'
 import { RootContext } from './stores'
 
-export const App = observer(({ store, routes }: { readonly store: AppStore; readonly routes: AppRoutes }) => {
+export const App = observer(({ store, routes }: { readonly store: AppStore, readonly routes: AppRoutes }) => {
     return (
         <RootContext.Provider value={store}>
             <Routes>

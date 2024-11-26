@@ -4,7 +4,7 @@ import lincy from '@lincy/eslint-config'
 import pluginMobx from 'eslint-plugin-mobx'
 
 const autoImport = JSON.parse(
-    await readFile(new URL('./.eslintrc-auto-import.json', import.meta.url)),
+    (await readFile(new URL('./.eslintrc-auto-import.json', import.meta.url))).toString(),
 )
 
 const config = lincy(
