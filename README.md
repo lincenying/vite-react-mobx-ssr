@@ -11,10 +11,42 @@
 -   [vite-vue3-h5](https://github.com/lincenying/vite-vue3-h5) - Vue3 + Vant + Vite 入门模板
 -   [vite-vue3-admin](https://github.com/lincenying/vite-vue3-admin) - Vue3 + ElementPlus + Vite 管理后台入门模板
 
-## Usage
+# 运行
 
--   dev: `pnpm serve`
+```bash
+npx degit lincenying/vite-react-mobx-ssr my-react-mobx-ssr-app
+cd my-react-mobx-ssr-app
+pnpm i # 如果你没有安装 pnpm，请运行：npm install -g pnpm
+```
 
--   build: `pnpm build`
+### 开发环境
 
--   start: `pnpm start`
+```bash
+pnpm serve
+```
+
+### 生产环境
+
+```bash
+pnpm build
+```
+
+### 生产环境预览
+
+```bash
+pnpm start
+```
+
+### Lint 和修复文件
+
+```bash
+pnpm lint # eslint检测不修复
+pnpm lint:fix # eslint检测并修复
+pnpm lint:ts # ts 类型检测
+pnpm lint:css # css 检测并修复
+
+```
+
+## License
+
+[MIT]
