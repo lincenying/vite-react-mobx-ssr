@@ -40,7 +40,6 @@
     "@lincy/eslint-config": "^5.3.0",
     "@lincy/static-style-extract": "^1.0.5",
     "@lincy/stylelint-config": "^2.0.1",
-    "@lincy/vite-plugin-mock": "^3.0.0",
     "@types/express": "^5.0.0",
     "@types/node": "^22.9.4",
     "@types/postcss-flexbugs-fixes": "^5.0.3",
@@ -69,7 +68,8 @@
     "typescript": "^5.6.3",
     "unocss": "^0.64.1",
     "unplugin-auto-import": "^0.18.5",
-    "vite": "^5.4.11"
+    "vite": "^5.4.11",
+    "vite-plugin-mock": "^3.0.2"
   },
   "simple-git-hooks": {
     "pre-commit": "npx lint-staged"
