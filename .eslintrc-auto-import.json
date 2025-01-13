@@ -123,6 +123,8 @@
     "HomeStore": true,
     "RootContext": true,
     "createStore": true,
-    "useStore": true
+    "useStore": true,
+    "PrefetchStore": true,
+    "useTheme": true
   }
 }

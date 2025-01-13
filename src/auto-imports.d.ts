@@ -114,6 +114,7 @@ declare global {
   const useStore: typeof import('./stores/index')['useStore']
   const useSyncExternalStore: typeof import('react')['useSyncExternalStore']
   const useTextSelection: typeof import('ahooks')['useTextSelection']
+  const useTheme: typeof import('ahooks')['useTheme']
   const useThrottle: typeof import('ahooks')['useThrottle']
   const useThrottleEffect: typeof import('ahooks')['useThrottleEffect']
   const useThrottleFn: typeof import('ahooks')['useThrottleFn']
@@ -134,7 +135,7 @@ declare global {
 // for type re-export
 declare global {
   // @ts-ignore
-  export type { AppStore } from './stores/index'
+  export type { AppStore, PrefetchStore } from './stores/index'
   import('./stores/index')
   // @ts-ignore
   export type { ArticleStore } from './stores/modules/article'

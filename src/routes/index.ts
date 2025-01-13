@@ -1,3 +1,5 @@
+import type { JSX } from 'react'
+
 const pages = import.meta.glob('../pages/*.tsx', { eager: true })
 
 const routes = Object.keys(pages).map((path) => {

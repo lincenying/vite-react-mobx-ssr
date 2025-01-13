@@ -6,7 +6,7 @@ import flexbugsFixes from 'postcss-flexbugs-fixes'
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
 
-import { defineConfig, type UserConfig } from 'vite'
+import { defineConfig } from 'vite'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -19,7 +19,7 @@ export const paths = {
     serverOutput: path.resolve(__dirname, '.', 'dist/server.js'),
 }
 
-export default defineConfig(({ mode }: UserConfig) => ({
+export default defineConfig(({ mode }) => ({
     build: {
         sourcemap: true,
         emptyOutDir: false,
