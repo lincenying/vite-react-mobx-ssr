@@ -1,7 +1,6 @@
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import react from '@vitejs/plugin-react'
-import flexbugsFixes from 'postcss-flexbugs-fixes'
 
 import UnoCSS from 'unocss/vite'
 import AutoImport from 'unplugin-auto-import/vite'
@@ -26,14 +25,13 @@ export default defineConfig(({ mode }) => ({
     },
     resolve: {
         alias: {
+            '~': paths.src,
             '@': paths.src,
         },
     },
     css: {
         postcss: {
-            plugins: [
-                flexbugsFixes,
-            ],
+            plugins: [],
         },
         preprocessorOptions: {
             scss: {
