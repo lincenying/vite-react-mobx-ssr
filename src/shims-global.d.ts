@@ -92,5 +92,8 @@ declare interface asyncDataConfig {
 declare interface Window {
     $$api: ApiClient
     $$lock: boolean
+    $timeout: {
+        [x: string]: Node.Timeout
+    }
     __INITIAL_STATE__: any
 }

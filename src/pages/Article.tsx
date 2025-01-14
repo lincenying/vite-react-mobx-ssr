@@ -12,6 +12,9 @@ export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
 }
 
 const PageArticle = observer(() => {
+    if (window.$timeout.list)
+        clearTimeout(window.$timeout.list)
+
     const navigate = useNavigate()
 
     const location = useLocation()
@@ -32,7 +35,7 @@ const PageArticle = observer(() => {
 
     useMount(() => {
         console.log('article componentDidMount')
-        window.scrollTo(0, 0)
+        // window.scrollTo(0, 0)
     })
 
     useUpdateEffect(() => {
@@ -57,7 +60,11 @@ const PageArticle = observer(() => {
                     bordered={false}
                     title={data.c_title}
                     extra={(
-                        <a onClick={() => navigate(-1)}>后退</a>
+                        <div>
+                            <a onClick={() => navigate('/')}>首页</a>
+                            {' '}
+                            <a onClick={() => navigate(-1)}>后退</a>
+                        </div>
                     )}
                 >
                     <div

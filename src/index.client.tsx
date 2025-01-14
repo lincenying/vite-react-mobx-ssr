@@ -10,6 +10,10 @@ import { createStore } from './stores'
 import 'uno.css'
 import './styles/index.scss'
 
+if (!window.$timeout) {
+    window.$timeout = {}
+}
+
 const container = document.getElementById('root')
 
 const store = createStore()

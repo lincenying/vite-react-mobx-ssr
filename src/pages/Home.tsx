@@ -1,7 +1,7 @@
 import type { PrefetchContext } from '@/App'
 
-import ls from 'store2'
 import { Button, List, Spin } from '@/antd'
+import { useAutoScroll } from '~/composables'
 
 export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
     return ctx.store.topics.getTopics(
@@ -30,12 +30,6 @@ const Home = observer(() => {
             topics.getTopics({ page: 1, limit: 20, pathname })
         }
 
-        const scrollTop = ls.get(pathname) || 0
-        ls.remove(pathname)
-        if (scrollTop) {
-            window.scrollTo(0, scrollTop)
-        }
-
         document.title = 'M.M.M 小屋'
     })
 
@@ -49,6 +43,8 @@ const Home = observer(() => {
         await topics.getTopics({ page: topics.page + 1, limit: 20, pathname })
         setShowMoreBtn(true)
     }
+
+    useAutoScroll('list')
 
     const { data } = topics
 
