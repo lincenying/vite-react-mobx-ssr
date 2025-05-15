@@ -62,5 +62,17 @@ export default defineConfig((configEnv) => {
             }),
             devSSR(),
         ],
+        optimizeDeps: {
+            include: [
+                'react-router-dom',
+                'react-router',
+            ],
+        },
+        ssr: {
+            noExternal: [
+                'react-router-dom',
+                'react-router',
+            ],
+        },
     }
 })

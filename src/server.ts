@@ -25,7 +25,7 @@ export async function createServer() {
         res.send('react and vite!')
     })
 
-    server.get('*', async (req, res) => {
+    server.get('/{*default}', async (req, res) => {
         const { html } = await indexServer.render({ req, res, template })
 
         res.setHeader('Content-Type', 'text/html')
