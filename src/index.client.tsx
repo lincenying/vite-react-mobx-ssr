@@ -1,7 +1,7 @@
 import type { PrefetchContext } from './App'
 import { hydrateRoot } from 'react-dom/client'
 
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter } from 'react-router'
 import { App, prefetch } from './App'
 
 import { createRoutes } from './routes'

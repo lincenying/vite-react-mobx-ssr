@@ -35,7 +35,7 @@ export default defineConfig(({ mode }) => ({
         },
         preprocessorOptions: {
             scss: {
-                api: 'modern-compiler',
+
             },
         },
         devSourcemap: mode === 'development',
@@ -52,7 +52,7 @@ export default defineConfig(({ mode }) => ({
             ],
             imports: [
                 'react',
-                'react-router-dom',
+                'react-router',
                 'ahooks',
                 {
                     'mobx-react-lite': ['observer'],

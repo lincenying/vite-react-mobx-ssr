@@ -1,5 +1,6 @@
 import type { PrefetchContext } from '@/App'
 
+import { Link } from 'react-router'
 import { Button, List, Spin } from '@/antd'
 import { useAutoScroll } from '~/composables'
 

@@ -2,7 +2,7 @@ import type { Request, Response } from 'express'
 import type { AppRoutes } from './routes'
 
 import type { AppStore } from './stores'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router'
 import { RootContext } from './stores'
 
 export const App = observer(({ store, routes }: { readonly store: AppStore, readonly routes: AppRoutes }) => {

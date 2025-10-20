@@ -64,13 +64,11 @@ export default defineConfig((configEnv) => {
         ],
         optimizeDeps: {
             include: [
-                'react-router-dom',
                 'react-router',
             ],
         },
         ssr: {
             noExternal: [
-                'react-router-dom',
                 'react-router',
             ],
         },

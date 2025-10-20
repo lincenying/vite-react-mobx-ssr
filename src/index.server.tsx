@@ -1,6 +1,6 @@
 import type { RenderContext } from './App'
 import ReactDOMServer from 'react-dom/server'
-import { StaticRouter } from 'react-router-dom/server'
+import { StaticRouter } from 'react-router'
 
 import serializeJavascript from 'serialize-javascript'
 import { api } from './api/index-server'
