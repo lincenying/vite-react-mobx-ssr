@@ -45,6 +45,7 @@ export default defineConfig((configEnv) => {
             host: '0.0.0.0',
             hot: true,
             disableHostCheck: true,
+            open: true,
             proxy: {
                 '/api': {
                     target: 'https://php.mmxiaowu.com',

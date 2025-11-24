@@ -50,14 +50,14 @@ const PageArticle = observer(() => {
     const { data } = article
 
     return (
-        <div className="main">
+        <div className="main" style={{ display: 'none' }}>
             <Spin
                 delay={100}
                 size="large"
                 spinning={article.pathname !== pathname}
             >
                 <Card
-                    bordered={false}
+                    variant="outlined"
                     title={data.c_title}
                     extra={(
                         <div>

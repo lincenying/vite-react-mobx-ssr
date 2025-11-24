@@ -1,7 +1,7 @@
 import type { PrefetchContext } from '@/App'
 
 import { Link } from 'react-router'
-import { Button, List, Spin } from '@/antd'
+import { Button, Spin } from '@/antd'
 import { useAutoScroll } from '~/composables'
 
 export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
@@ -50,21 +50,15 @@ const Home = observer(() => {
     const { data } = topics
 
     return (
-        <div className="main">
-            <List
-                dataSource={data}
-                itemLayout="horizontal"
-                renderItem={item => (
-                    <List.Item>
-                        <List.Item.Meta title={
-                            <Link className="li-name" to={`/article/${item.c_id}`}>{item.c_title}</Link>
-                        }
-                        />
-                    </List.Item>
-                )}
-            />
-
+        <div className="main" style={{ display: 'none' }}>
             <ul>
+                {
+                    data.map(item => (
+                        <li key={item.c_id}>
+                            <Link className="li-name" to={`/article/${item.c_id}`}>{item.c_title}</Link>
+                        </li>
+                    ))
+                }
                 <li className="page">
                     {showMoreBtn ? <Button onClick={handleLoadMore} type="primary">加载下一页</Button> : <Spin /> }
                 </li>

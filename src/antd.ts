@@ -1,1 +1,1 @@
-export { Button, Card, Input, List, Radio, Spin } from 'antd'
+export { Button, Card, Input, Radio, Spin } from 'antd'
