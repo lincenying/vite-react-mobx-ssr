@@ -10,7 +10,6 @@ export function useAutoScroll(key: string) {
                 clearTimeout(window.$timeout[key])
 
             window.$timeout[key] = window.setTimeout(() => {
-                console.log(window.scrollY)
                 ls.set(`scroll_path_${pathname}`, window.scrollY)
             }, 200)
         }
