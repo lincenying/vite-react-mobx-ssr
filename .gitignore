@@ -3,3 +3,4 @@ dist
 .eslintcache
 *.log
 public/static/css/antd
+.cursor/rules/global*.mdc
