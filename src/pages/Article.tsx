@@ -1,15 +1,7 @@
-import type { PrefetchContext } from '@/App'
+import { useEffect, useMemo, useRef } from 'react'
+import { useLocation, useNavigate, useParams } from 'react-router'
 import { Card, Spin } from '@/antd'
-
-export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
-    return ctx.store.article.getArticle(
-        {
-            id: ctx.params.id,
-            pathname: ctx.req.originalUrl,
-        },
-        ctx.api,
-    )
-}
+import { useStore } from '@/stores'
 
 const PageArticle = observer(() => {
     if (window.$timeout.list)
@@ -33,47 +25,44 @@ const PageArticle = observer(() => {
         }
     }, [article, id, pathname])
 
-    useMount(() => {
-        console.log('article componentDidMount')
-        // window.scrollTo(0, 0)
-    })
-
-    useUpdateEffect(() => {
-        console.log('article componentDidUpdate')
-        console.log(firstPathname.current, pathname)
+    useEffect(() => {
+        if (firstPathname.current !== pathname) {
+            firstPathname.current = pathname
+        }
     }, [pathname])
 
-    useUpdateEffect(() => {
-        document.title = article.data.c_title
-    }, [article.pathname])
+    useEffect(() => {
+        if (article.data.c_title) {
+            document.title = article.data.c_title
+        }
+    }, [article.data.c_title, article.pathname])
 
     const { data } = article
 
     return (
-        <div className="main" style={{ display: 'none' }}>
-            <Spin
-                delay={100}
-                size="large"
-                spinning={article.pathname !== pathname}
+        <Spin
+            delay={100}
+            size="large"
+            spinning={article.pathname !== pathname}
+        >
+            <Card
+                variant="outlined"
+                title={data.c_title}
+                extra={(
+                    <div>
+                        <a className="cursor-pointer text-blue-600" onClick={() => navigate('/')}>首页</a>
+                        {' '}
+                        <a className="cursor-pointer text-blue-600" onClick={() => navigate(-1)}>后退</a>
+                    </div>
+                )}
             >
-                <Card
-                    variant="outlined"
-                    title={data.c_title}
-                    extra={(
-                        <div>
-                            <a onClick={() => navigate('/')}>首页</a>
-                            {' '}
-                            <a onClick={() => navigate(-1)}>后退</a>
-                        </div>
-                    )}
-                >
-                    <div
-                        className="article-content"
-                        dangerouslySetInnerHTML={{ __html: data.c_content }}
-                    />
-                </Card>
-            </Spin>
-        </div>
+                <div
+                    className="break-words article-content"
+                    dangerouslySetInnerHTML={{ __html: data.c_content }}
+                />
+            </Card>
+        </Spin>
     )
 })
+
 export default PageArticle

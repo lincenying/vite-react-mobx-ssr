@@ -1,3 +1,5 @@
+import type { IApiResponse } from '@/types'
+import type { IApiServer } from '@/types/api'
 import axios from 'axios'
 import md5 from 'md5'
 import qs from 'qs'
@@ -16,7 +18,7 @@ function objToStr(cookies: Record<string, string | number | boolean>) {
 
 export default {}
 
-export function api(cookies: Record<string, any>): ApiServer {
+export function api(cookies: Record<string, string>): IApiServer {
     return {
         cookies,
         api: axios.create({
@@ -30,13 +32,13 @@ export function api(cookies: Record<string, any>): ApiServer {
         getCookies() {
             return this.cookies
         },
-        async post(url, data, headers = {}) {
-            const cookies = this.getCookies() || {}
-            const username = cookies.username || ''
+        async post<T>(url: string, data: Record<string, unknown>, headers: Record<string, unknown> = {}): Promise<IApiResponse<T>> {
+            const cookieData = this.getCookies() || {}
+            const username = cookieData.username || ''
             const key = md5(url + JSON.stringify(data) + username)
             if (config.cached && data.cache && config.cached.has(key)) {
-                const data = config.cached.get(key)
-                return Promise.resolve(data && data.data)
+                const cached = config.cached.get(key) as { data: IApiResponse<unknown> } | undefined
+                return Promise.resolve(cached?.data as IApiResponse<T>)
             }
             const res = await this.api({
                 method: 'post',
@@ -50,15 +52,15 @@ export function api(cookies: Record<string, any>): ApiServer {
             if (config.cached && data.cache) {
                 config.cached.set(key, res)
             }
-            return res && res.data
+            return res?.data as IApiResponse<T>
         },
-        async get(url, params, headers = {}) {
-            const cookies = this.getCookies() || {}
-            const username = cookies.username || ''
+        async get<T>(url: string, params: Record<string, unknown>, headers: Record<string, unknown> = {}): Promise<IApiResponse<T>> {
+            const cookieData = this.getCookies() || {}
+            const username = cookieData.username || ''
             const key = md5(url + JSON.stringify(params) + username)
             if (config.cached && params.cache && config.cached.has(key)) {
-                const res = config.cached.get(key)
-                return Promise.resolve(res && res.data)
+                const res = config.cached.get(key) as { data: IApiResponse<unknown> } | undefined
+                return Promise.resolve(res?.data as IApiResponse<T>)
             }
             return this.api({
                 method: 'get',
@@ -71,7 +73,7 @@ export function api(cookies: Record<string, any>): ApiServer {
                 if (config.cached && params.cache) {
                     config.cached.set(key, res)
                 }
-                return res && res.data
+                return res?.data as IApiResponse<T>
             })
         },
     }

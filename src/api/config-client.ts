@@ -1,5 +1,7 @@
+import { getApiBaseUrl } from '@/utils/env'
+
 const config = {
-    api: '/api/',
+    api: getApiBaseUrl(),
     timeout: 30000,
 }
 

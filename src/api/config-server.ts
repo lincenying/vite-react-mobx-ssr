@@ -1,14 +1,13 @@
 import { LRUCache } from 'lru-cache'
-
-import apiDomain from './url.js'
+import { getServerApiDomain } from '@/utils/env'
 
 const needCached = false
-const cached = needCached ? new LRUCache<string, any>({
+const cached = needCached ? new LRUCache<string, unknown>({
     max: 1000,
 }) : null
 
 const config = {
-    api: `${apiDomain}/api/`,
+    api: `${getServerApiDomain()}/api/`,
     port: 8080,
     timeout: 30000,
     cached,

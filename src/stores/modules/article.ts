@@ -1,9 +1,10 @@
 import type { AppStore, PrefetchStore } from '..'
-import type { ApiConfig, Article, ArticleStoreItem } from '~/types'
-import { makeAutoObservable, runInAction } from 'mobx'
+import type { IApiConfig, IArticle, IArticleDetailState } from '@/types'
+import { getArticleDetail } from '@/api/articleApi'
 import api from '@/api/index-client'
+import { makeAutoObservable, runInAction } from 'mobx'
 
-export class ArticleStore implements PrefetchStore<ArticleStoreItem> {
+export class ArticleStore implements PrefetchStore<IArticleDetailState> {
     constructor(root: AppStore) {
         makeAutoObservable(this)
         this.root = root
@@ -13,17 +14,16 @@ export class ArticleStore implements PrefetchStore<ArticleStoreItem> {
 
     isLoad = false
     pathname = ''
-    data: Article = {} as Article
+    data: IArticle = {} as IArticle
 
-    async getArticle(config: ApiConfig, $api?: ApiServer | ApiClient) {
+    async getArticle(config: IApiConfig, $api?: import('@/types/api').IApiClient | import('@/types/api').IApiServer) {
         $api = $api || api
         if (config.pathname === this.pathname) {
             return
         }
         this.isLoad = false
-        const { code, data } = await $api.get<Article>(`/fetch/article/detail`, config)
+        const { code, data } = await getArticleDetail(config, $api)
         if (code === 200) {
-            // 在async/await函数中, 赋值需要在runInAction中
             runInAction(() => {
                 this.isLoad = true
                 this.data = data
@@ -34,12 +34,12 @@ export class ArticleStore implements PrefetchStore<ArticleStoreItem> {
         return 'success'
     }
 
-    hydrate(state: ArticleStoreItem): void {
+    hydrate(state: IArticleDetailState): void {
         this.data = state.data
         this.pathname = state.pathname || '/'
     }
 
-    dehydra(): ArticleStoreItem {
+    dehydrate(): IArticleDetailState {
         return {
             data: this.data,
             pathname: this.pathname,

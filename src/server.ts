@@ -3,7 +3,9 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import express from 'express'
 
-type RenderFn = (...args: any[]) => Promise<{ html: string }>
+import type { IRenderContext } from './App'
+
+type RenderFn = (context: IRenderContext) => Promise<IRenderContext>
 
 // 假设:客户端文件在同一目录下
 export async function createServer() {
@@ -26,10 +28,10 @@ export async function createServer() {
     })
 
     server.get('/{*default}', async (req, res) => {
-        const { html } = await indexServer.render({ req, res, template })
+        const result = await indexServer.render({ req, res, template })
 
         res.setHeader('Content-Type', 'text/html')
-        res.end(html)
+        res.end(result.html)
     })
 
     return server

@@ -1,6 +1,11 @@
 import ls from 'store2'
+import { useEffect } from 'react'
+import { useLocation } from 'react-router'
 
-export function useAutoScroll(key: string) {
+/**
+ * 记住并恢复页面滚动位置
+ */
+export function useAutoScroll(key: string): void {
     const location = useLocation()
     const pathname = location.pathname
 
@@ -18,10 +23,10 @@ export function useAutoScroll(key: string) {
         window.scrollTo(0, scrollY)
         ls.set(`scroll_path_${pathname}`, 0)
 
-        window.addEventListener('scroll', handleScroll) // 添加滚动事件监听
+        window.addEventListener('scroll', handleScroll)
 
         return () => {
-            window.removeEventListener('scroll', handleScroll) // 组件卸载时移除事件监听
+            window.removeEventListener('scroll', handleScroll)
         }
-    }, [])
+    }, [key, pathname])
 }

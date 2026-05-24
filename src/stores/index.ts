@@ -1,17 +1,21 @@
-import { createContext } from 'react'
+import { createContext, useContext } from 'react'
 import { ArticleStore } from './modules/article'
-import { HomeStore } from './modules/topics'
+import { HomeStore } from './modules/home'
 
 export interface PrefetchStore<State> {
-    // 合并SSR预取数据
+    /** 合并 SSR 预取数据 */
     hydrate: (state: State) => void
-    // 提供SSR预取数据
-    dehydra: () => State | undefined
+    /** 提供 SSR 预取数据 */
+    dehydrate: () => State | undefined
 }
 
 type PickKeys<T> = {
-    [K in keyof T]: T[K] extends PrefetchStore<any> ? K : never
+    [K in keyof T]: T[K] extends PrefetchStore<unknown> ? K : never
 }[keyof T]
+
+type DehydratedState = {
+    [K in PickKeys<AppStore>]?: AppStore[K] extends PrefetchStore<infer S> ? S : never
+}
 
 export class AppStore {
     topics: HomeStore
@@ -22,30 +26,26 @@ export class AppStore {
         this.article = new ArticleStore(this)
     }
 
-    hydrate(data: Record<string, unknown>) {
-        Object.keys(data).forEach((key) => {
-            const k = key as PickKeys<AppStore>
-
+    hydrate(data: DehydratedState) {
+        (Object.keys(data) as PickKeys<AppStore>[]).forEach((key) => {
             if (import.meta.env.DEV) {
-                console.info(`hydrate ${k}`)
+                console.info(`hydrate ${key}`)
             }
-            if (this[k]) {
-                this[k]?.hydrate?.(data[k] as any)
+            const state = data[key]
+            if (state && this[key]) {
+                this[key]?.hydrate?.(state)
             }
         })
     }
 
-    dehydra() {
-        type Data = Record<PickKeys<AppStore>, unknown>
-        const data: Partial<Data> = {}
+    dehydrate(): DehydratedState {
+        const data: DehydratedState = {}
 
-        Object.keys(this).forEach((key) => {
-            const k = key as PickKeys<AppStore>
-
-            data[k] = this[k]?.dehydra?.()
+        (Object.keys(this) as PickKeys<AppStore>[]).forEach((key) => {
+            data[key] = this[key]?.dehydrate?.()
         })
 
-        return data as Data
+        return data
     }
 }
 

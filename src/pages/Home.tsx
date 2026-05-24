@@ -1,19 +1,8 @@
-import type { PrefetchContext } from '@/App'
-
-import { Link } from 'react-router'
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Link, useLocation } from 'react-router'
 import { Button, Spin } from '@/antd'
-import { useAutoScroll } from '~/composables'
-
-export function prefetch(ctx: PrefetchContext, _type: 'server' | 'client') {
-    return ctx.store.topics.getTopics(
-        {
-            page: 1,
-            limit: 20,
-            pathname: ctx.req.originalUrl.split('?')[0],
-        },
-        ctx.api,
-    )
-}
+import { useAutoScroll } from '@/hooks/useAutoScroll'
+import { useStore } from '@/stores'
 
 const Home = observer(() => {
     const location = useLocation()
@@ -24,19 +13,18 @@ const Home = observer(() => {
     const firstPathname = useRef(pathname)
     const [showMoreBtn, setShowMoreBtn] = useState(true)
 
-    useMount(() => {
-        console.log('topics componentDidMount')
-        console.log(topics.pathname, location.pathname)
+    useEffect(() => {
+        document.title = 'M.M.M 小屋'
+
         if (topics.pathname !== location.pathname) {
             topics.getTopics({ page: 1, limit: 20, pathname })
         }
+    }, [location.pathname, pathname, topics])
 
-        document.title = 'M.M.M 小屋'
-    })
-
-    useUpdateEffect(() => {
-        console.log('topics componentDidUpdate')
-        console.log(firstPathname.current, pathname)
+    useEffect(() => {
+        if (firstPathname.current !== pathname) {
+            firstPathname.current = pathname
+        }
     }, [pathname])
 
     const handleLoadMore = async () => {
@@ -50,20 +38,23 @@ const Home = observer(() => {
     const { data } = topics
 
     return (
-        <div className="main" style={{ display: 'none' }}>
-            <ul>
-                {
-                    data.map(item => (
-                        <li key={item.c_id}>
-                            <Link className="li-name" to={`/article/${item.c_id}`}>{item.c_title}</Link>
-                        </li>
-                    ))
-                }
-                <li className="page">
-                    {showMoreBtn ? <Button onClick={handleLoadMore} type="primary">加载下一页</Button> : <Spin /> }
-                </li>
-            </ul>
-        </div>
+        <ul className="list-none p-0 m-0">
+            {
+                data.map(item => (
+                    <li key={item.c_id} className="py-2.5 list-none">
+                        <Link
+                            className="inline-block pl-2.5 text-blue-600 hover:underline"
+                            to={`/article/${item.c_id}`}
+                        >
+                            {item.c_title}
+                        </Link>
+                    </li>
+                ))
+            }
+            <li className="h-8 text-center list-none">
+                {showMoreBtn ? <Button onClick={handleLoadMore} type="primary">加载下一页</Button> : <Spin />}
+            </li>
+        </ul>
     )
 })
 

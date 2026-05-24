@@ -1,48 +1,49 @@
-import type { RenderContext } from './App'
+import type { IRenderContext } from './App'
 import ReactDOMServer from 'react-dom/server'
-import { StaticRouter } from 'react-router'
-
+import {
+    createStaticHandler,
+    createStaticRouter,
+    StaticRouterProvider,
+} from 'react-router'
 import serializeJavascript from 'serialize-javascript'
 import { api } from './api/index-server'
-import { App, prefetch } from './App'
+import { createAppRoutes } from '@/router'
+import { createStore } from '@/stores'
+import { createFetchRequest } from '@/utils/createFetchRequest'
 
-import { createRoutes } from './routes'
-
-import { createStore } from './stores'
-
-// see index.html
 const APP_HTML = '<!--app-html-->'
 const APP_STATE = '<!--app-state-->'
 
-const serialize = (state: Record<string, unknown> | undefined) => `<script>;window.__PREFETCHED_STATE__=${serializeJavascript(state)};</script>`
+const serialize = (state: Record<string, unknown> | undefined) =>
+    `<script>;window.__PREFETCHED_STATE__=${serializeJavascript(state)};</script>`
 
-export async function render(context: RenderContext) {
-    const ctx = context as Required<RenderContext>
-    const { req } = ctx
+export async function render(context: IRenderContext) {
+    const { req, res, template } = context
 
     const store = createStore()
-    const routes = createRoutes()
+    const serverApi = api(req?.cookies as Record<string, string> || {})
+    const routes = createAppRoutes(store, serverApi)
 
-    ctx.store = store
-    ctx.routes = routes
-    ctx.api = api(req && req.cookies)
-    ctx.params = Object.fromEntries(new URLSearchParams(req.originalUrl.split('?')[1]))
+    const { query, dataRoutes } = createStaticHandler(routes)
+    const fetchRequest = createFetchRequest(req, res)
+    const handlerContext = await query(fetchRequest)
 
-    const success = await prefetch(ctx, 'server').catch((e) => {
-        console.error(e)
-        return false
-    })
+    if (handlerContext instanceof Response) {
+        res.status(handlerContext.status)
+        res.set('Location', handlerContext.headers.get('Location') || '/')
+        res.end()
+        return context
+    }
+
+    const router = createStaticRouter(dataRoutes, handlerContext)
 
     const html = ReactDOMServer.renderToString(
-        <StaticRouter location={req.originalUrl}>
-            <App routes={routes} store={store} />
-        </StaticRouter>,
+        <StaticRouterProvider router={router} context={handlerContext} />,
     )
 
-    // 状态现在可用
-    const state = success ? store.dehydra() : undefined
+    const state = store.dehydrate()
 
-    ctx.html = ctx.template.replace(APP_HTML, html).replace(APP_STATE, serialize(state))
+    context.html = template.replace(APP_HTML, html).replace(APP_STATE, serialize(state))
 
-    return ctx
+    return context
 }

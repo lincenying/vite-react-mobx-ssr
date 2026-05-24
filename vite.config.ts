@@ -53,7 +53,6 @@ export default defineConfig(({ mode }) => ({
             imports: [
                 'react',
                 'react-router',
-                'ahooks',
                 {
                     'mobx-react-lite': ['observer'],
                 },
@@ -61,7 +60,7 @@ export default defineConfig(({ mode }) => ({
             dts: 'src/auto-imports.d.ts',
             dirs: [
                 'src/stores/**',
-                'src/composables',
+                'src/hooks',
             ],
 
             resolvers: [],

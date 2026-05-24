@@ -1,9 +1,10 @@
 import type { AppStore, PrefetchStore } from '..'
-import type { Article, ArticleStore, ListConfig } from '~/types'
-import { makeAutoObservable, runInAction } from 'mobx'
+import type { IArticle, IArticleListState, IListConfig } from '@/types'
+import { getArticleList } from '@/api/articleApi'
 import api from '@/api/index-client'
+import { makeAutoObservable, runInAction } from 'mobx'
 
-export class HomeStore implements PrefetchStore<ArticleStore> {
+export class HomeStore implements PrefetchStore<IArticleListState> {
     constructor(root: AppStore) {
         makeAutoObservable(this)
         this.root = root
@@ -14,17 +15,17 @@ export class HomeStore implements PrefetchStore<ArticleStore> {
     hasNext = 0
     page = 1
     pathname = ''
-    data: Article[] = []
+    data: IArticle[] = []
 
-    async getTopics(config: ListConfig, $api?: ApiServer | ApiClient) {
+    async getTopics(config: IListConfig, $api?: import('@/types/api').IApiClient | import('@/types/api').IApiServer) {
         $api = $api || api
         if (this.data.length > 0 && config.pathname === this.pathname && config.page === 1) {
             return
         }
-        const { code, data } = await $api.get<ResDataLists<Article>>('/fetch/article/lists', { ...config, cache: true })
+        const { code, data } = await getArticleList(config, $api)
 
         if (data && code === 200) {
-            let _data: Article[]
+            let _data: IArticle[]
             if (config.page === 1) {
                 _data = [...data.list]
             }
@@ -42,13 +43,13 @@ export class HomeStore implements PrefetchStore<ArticleStore> {
         return 'success'
     }
 
-    hydrate(state: ArticleStore): void {
+    hydrate(state: IArticleListState): void {
         this.data = state.data
         this.page = state.page
         this.pathname = state.pathname || '/'
     }
 
-    dehydra(): ArticleStore {
+    dehydrate(): IArticleListState {
         return {
             data: this.data,
             page: this.page,

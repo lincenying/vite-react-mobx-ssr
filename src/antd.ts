@@ -1,1 +1,1 @@
-export { Button, Card, Input, Radio, Spin } from 'antd'
+export { Button, Card, ConfigProvider, Input, Radio, Spin } from 'antd'

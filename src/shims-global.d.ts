@@ -1,11 +1,14 @@
 /// <reference types="vite/client" />
 
+import type { IApiClient, IApiResponse, IApiServer } from '@/types'
+
 declare interface Window {
-    __PREFETCHED_STATE__: any
+    __PREFETCHED_STATE__?: Record<string, unknown>
 }
 
 interface ImportMetaEnv {
     readonly VITE_SERVER_URL: string
+    readonly VITE_API_BASE_URL: string
 }
 
 interface ImportMeta {
@@ -25,9 +28,9 @@ declare type NonNullable<T> = T extends null | undefined ? never : T
  */
 declare type Arrayable<T> = T | T[]
 /**
- * 键为字符串, 值为 Any 的对象
+ * 键为字符串, 值为 T 的对象
  */
-declare type Objable<T = any> = Record<string, T>
+declare type Objable<T = unknown> = Record<string, T>
 /**
  * Function
  */
@@ -35,14 +38,15 @@ declare type Fn<T = void> = () => T
 /**
  * 任意函数
  */
-declare type AnyFn<T = any> = (...args: any[]) => T
+declare type AnyFn<T = unknown> = (...args: unknown[]) => T
 
-declare type PromiseFn<T = any> = (...args: any[]) => Promise<T>
+declare type PromiseFn<T = unknown> = (...args: unknown[]) => Promise<T>
 /**
  * Promise, or maybe not
  */
 declare type Awaitable<T> = T | PromiseLike<T>
 
+/** @deprecated 使用 IApiResponseLists */
 declare interface ResDataLists<T> {
     hasNext: number | boolean
     hasPrev: number | boolean
@@ -50,50 +54,20 @@ declare interface ResDataLists<T> {
     list: T[]
 }
 
-/**
- * 接口返回模板
- * ```
- * {
-    data: T
-    code: number
-    message: string
-    info?: string
- * }
- * ```
- */
-declare interface ResData<T> {
-    data: T
-    code: number
-    message: string
-    info?: string
-    [propName: string]: any
-}
+/** @deprecated 使用 IApiResponse */
+declare type ResData<T> = IApiResponse<T>
 
-declare interface ApiClient {
-    get: <T = void>(url: string, params: Objable, headers?: Objable) => Promise<ResData<T>>
-    post: <T = void>(url: string, data: Objable, headers?: Objable) => Promise<ResData<T>>
-    file: <T = void>(url: string, data: Objable, headers?: Objable) => Promise<ResData<T>>
-}
+/** @deprecated 使用 IApiClient */
+declare type ApiClient = IApiClient
 
-declare interface ApiServer {
-    get: <T = void>(url: string, params: Objable, headers?: Objable) => Promise<ResData<T>>
-    post: <T = void>(url: string, data: Objable, headers?: Objable) => Promise<ResData<T>>
-    cookies: Objable<string>
-    api: import('axios').AxiosInstance
-    getCookies: () => Objable<string>
-}
-
-declare interface asyncDataConfig {
-    store: import('pinia').Pinia
-    route: import('vue-router').RouteLocationNormalized
-    api?: UnfAble<ApiServer>
-}
+/** @deprecated 使用 IApiServer */
+declare type ApiServer = IApiServer
 
 declare interface Window {
-    $$api: ApiClient
+    $$api: IApiClient
     $$lock: boolean
     $timeout: {
-        [x: string]: Node.Timeout
+        [x: string]: ReturnType<typeof setTimeout>
     }
-    __INITIAL_STATE__: any
+    __INITIAL_STATE__?: unknown
 }
