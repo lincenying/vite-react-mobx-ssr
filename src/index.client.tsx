@@ -1,7 +1,7 @@
 import { hydrateRoot } from 'react-dom/client'
 import { RouterProvider } from 'react-router'
 import { createAppRouter } from '@/router'
-import { createStore, type AppStore } from '@/stores'
+import { type AppStore, createStore } from '@/stores'
 
 import 'uno.css'
 import './styles/index.scss'

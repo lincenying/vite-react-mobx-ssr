@@ -1,8 +1,8 @@
 import type { AppStore, PrefetchStore } from '..'
-import type { IApiConfig, IArticle, IArticleDetailState } from '@/types'
+import type { IApiClient, IApiConfig, IApiServer, IArticle, IArticleDetailState } from '@/types'
+import { makeAutoObservable, runInAction } from 'mobx'
 import { getArticleDetail } from '@/api/articleApi'
 import api from '@/api/index-client'
-import { makeAutoObservable, runInAction } from 'mobx'
 
 export class ArticleStore implements PrefetchStore<IArticleDetailState> {
     constructor(root: AppStore) {
@@ -16,8 +16,7 @@ export class ArticleStore implements PrefetchStore<IArticleDetailState> {
     pathname = ''
     data: IArticle = {} as IArticle
 
-    async getArticle(config: IApiConfig, $api?: import('@/types/api').IApiClient | import('@/types/api').IApiServer) {
-        $api = $api || api
+    async getArticle(config: IApiConfig, $api: IApiClient | IApiServer = api) {
         if (config.pathname === this.pathname) {
             return
         }

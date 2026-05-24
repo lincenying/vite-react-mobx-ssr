@@ -1,6 +1,6 @@
+import type { LoaderFunctionArgs } from 'react-router'
 import type { AppStore } from '@/stores'
 import type { IApiClient, IApiServer } from '@/types/api'
-import type { LoaderFunctionArgs } from 'react-router'
 
 /**
  * 首页路由 loader：预取文章列表

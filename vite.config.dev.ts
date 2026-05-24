@@ -5,10 +5,19 @@ import { viteMockServe } from 'vite-plugin-mock'
 
 import baseConfig, { paths } from './vite.config'
 
+interface IRenderSSRType {
+    method?: string
+    originalUrl?: string
+    url?: string
+    headers: {
+        accept?: string
+    }
+}
+
 /**
  * 判断是否应由 SSR 中间件处理（仅 HTML 页面导航）
  */
-function shouldRenderSSR(req: { method?: string; originalUrl?: string; url?: string; headers: { accept?: string } }): boolean {
+function shouldRenderSSR(req: IRenderSSRType): boolean {
     if (req.method !== 'GET' && req.method !== 'HEAD')
         return false
 

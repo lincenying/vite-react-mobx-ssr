@@ -1,6 +1,6 @@
-import ls from 'store2'
 import { useEffect } from 'react'
 import { useLocation } from 'react-router'
+import ls from 'store2'
 
 /**
  * 记住并恢复页面滚动位置

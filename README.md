@@ -15,7 +15,7 @@
 - [vite-react-mobx-ssr](https://github.com/lincenying/vite-react-mobx-ssr) - React + Mobx + Vite + SSR 入门模板
 - [vite-react-redux](https://github.com/lincenying/vite-react-redux) - React + Redux + Vite 入门模板
 
-# 运行
+## 运行
 
 ```bash
 npx degit lincenying/vite-react-mobx-ssr my-react-mobx-ssr-app

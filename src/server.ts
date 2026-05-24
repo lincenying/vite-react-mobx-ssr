@@ -1,9 +1,9 @@
+import type { IRenderContext } from './App'
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import express from 'express'
 
-import type { IRenderContext } from './App'
+import express from 'express'
 
 type RenderFn = (context: IRenderContext) => Promise<IRenderContext>
 

@@ -6,16 +6,17 @@ import {
     StaticRouterProvider,
 } from 'react-router'
 import serializeJavascript from 'serialize-javascript'
-import { api } from './api/index-server'
 import { createAppRoutes } from '@/router'
 import { createStore } from '@/stores'
 import { createFetchRequest, getRequestCookies, setRedirectResponse } from '@/utils/createFetchRequest'
+import { api } from './api/index-server'
 
 const APP_HTML = '<!--app-html-->'
 const APP_STATE = '<!--app-state-->'
 
-const serialize = (state: ReturnType<ReturnType<typeof createStore>['dehydrate']> | undefined) =>
-    `<script>;window.__PREFETCHED_STATE__=${serializeJavascript(state)};</script>`
+function serialize(state: ReturnType<ReturnType<typeof createStore>['dehydrate']> | undefined) {
+    return `<script>;window.__PREFETCHED_STATE__=${serializeJavascript(state)};</script>`
+}
 
 export async function render(context: IRenderContext) {
     const { req, res, template } = context
