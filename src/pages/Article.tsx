@@ -4,9 +4,6 @@ import { Card, Spin } from '@/antd'
 import { useStore } from '@/stores'
 
 const PageArticle = observer(() => {
-    if (window.$timeout.list)
-        clearTimeout(window.$timeout.list)
-
     const navigate = useNavigate()
 
     const location = useLocation()
@@ -18,6 +15,11 @@ const PageArticle = observer(() => {
     const article = useStore('article')
 
     const firstPathname = useRef(pathname)
+
+    useEffect(() => {
+        if (window.$timeout.list)
+            clearTimeout(window.$timeout.list)
+    }, [])
 
     useEffect(() => {
         if (article.pathname !== pathname) {
@@ -38,6 +40,8 @@ const PageArticle = observer(() => {
     }, [article.data.c_title, article.pathname])
 
     const { data } = article
+
+    useAutoScroll('article')
 
     return (
         <Spin

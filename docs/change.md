@@ -1,5 +1,34 @@
 # 变更记录
 
+## 2026-05-24 18:25:00
+
+### 改动内容
+
+1. **修复 SSR 渲染 `ReferenceError: window is not defined`**
+   - `pages/Article.tsx`：将 `window.$timeout` 清理逻辑从 render 函数体移入 `useEffect`，避免服务端渲染时访问浏览器 API
+
+### Commit Message
+
+```
+fix: 修复 Article 页 SSR 时访问 window 导致崩溃
+```
+
+## 2026-05-24 18:20:00
+
+### 改动内容
+
+1. **修复 Vite 开发 SSR 运行时 `req.get is not a function`**
+   - `createFetchRequest.ts`：抽象 `ISSRRequest` / `ISSRResponse`，兼容 Connect（Vite dev）与 Express（生产）
+   - Host / Protocol / Path 改从 `headers` 与 `x-forwarded-proto` 读取，不再依赖 Express 专有 API
+   - 新增 `getRequestCookies`、`setRedirectResponse` 供 SSR 渲染复用
+   - `App.tsx`、`index.server.tsx` 同步改用通用 SSR 请求/响应类型
+
+### Commit Message
+
+```
+fix: 修复 Vite 开发 SSR 下 Connect req 不兼容 Express API 的问题
+```
+
 ## 2026-05-24 18:16:00
 
 ### 改动内容

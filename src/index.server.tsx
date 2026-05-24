@@ -9,7 +9,7 @@ import serializeJavascript from 'serialize-javascript'
 import { api } from './api/index-server'
 import { createAppRoutes } from '@/router'
 import { createStore } from '@/stores'
-import { createFetchRequest } from '@/utils/createFetchRequest'
+import { createFetchRequest, getRequestCookies, setRedirectResponse } from '@/utils/createFetchRequest'
 
 const APP_HTML = '<!--app-html-->'
 const APP_STATE = '<!--app-state-->'
@@ -21,7 +21,7 @@ export async function render(context: IRenderContext) {
     const { req, res, template } = context
 
     const store = createStore()
-    const serverApi = api(req?.cookies as Record<string, string> || {})
+    const serverApi = api(getRequestCookies(req))
     const routes = createAppRoutes(store, serverApi)
 
     const { query, dataRoutes } = createStaticHandler(routes)
@@ -29,9 +29,7 @@ export async function render(context: IRenderContext) {
     const handlerContext = await query(fetchRequest)
 
     if (handlerContext instanceof Response) {
-        res.status(handlerContext.status)
-        res.set('Location', handlerContext.headers.get('Location') || '/')
-        res.end()
+        setRedirectResponse(res, handlerContext.status, handlerContext.headers.get('Location') || '/')
         return context
     }
 

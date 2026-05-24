@@ -1,8 +1,8 @@
-import type { Request, Response } from 'express'
+import type { ISSRRequest, ISSRResponse } from '@/utils/createFetchRequest'
 
 export interface IRenderContext {
-    req: Request
-    res: Response
+    req: ISSRRequest
+    res: ISSRResponse
     template: string
     html?: string
 }

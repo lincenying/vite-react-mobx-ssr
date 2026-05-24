@@ -6,10 +6,16 @@
 // biome-ignore lint: disable
 export {}
 declare global {
+  const Activity: typeof import('react').Activity
   const AppStore: typeof import('./stores/index').AppStore
   const ArticleStore: typeof import('./stores/modules/article').ArticleStore
+  const Fragment: typeof import('react').Fragment
   const HomeStore: typeof import('./stores/modules/home').HomeStore
   const RootContext: typeof import('./stores/index').RootContext
+  const Suspense: typeof import('react').Suspense
+  const cache: typeof import('react').cache
+  const cacheSignal: typeof import('react').cacheSignal
+  const createContext: typeof import('react').createContext
   const createRef: typeof import('react').createRef
   const createStore: typeof import('./stores/index').createStore
   const forwardRef: typeof import('react').forwardRef
@@ -17,12 +23,15 @@ declare global {
   const memo: typeof import('react').memo
   const observer: typeof import('mobx-react-lite').observer
   const startTransition: typeof import('react').startTransition
+  const use: typeof import('react').use
+  const useActionState: typeof import('react').useActionState
   const useAutoScroll: typeof import('./hooks/useAutoScroll').useAutoScroll
   const useCallback: typeof import('react').useCallback
   const useContext: typeof import('react').useContext
   const useDebugValue: typeof import('react').useDebugValue
   const useDeferredValue: typeof import('react').useDeferredValue
   const useEffect: typeof import('react').useEffect
+  const useEffectEvent: typeof import('react').useEffectEvent
   const useHref: typeof import('react-router').useHref
   const useId: typeof import('react').useId
   const useImperativeHandle: typeof import('react').useImperativeHandle
@@ -33,6 +42,7 @@ declare global {
   const useMemo: typeof import('react').useMemo
   const useNavigate: typeof import('react-router').useNavigate
   const useNavigationType: typeof import('react-router').useNavigationType
+  const useOptimistic: typeof import('react').useOptimistic
   const useOutlet: typeof import('react-router').useOutlet
   const useOutletContext: typeof import('react-router').useOutletContext
   const useParams: typeof import('react-router').useParams
