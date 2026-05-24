@@ -1,5 +1,20 @@
 # 变更记录
 
+## 2026-05-24 18:32:00
+
+### 改动内容
+
+1. **修复 dev SSR 误处理 source map 等静态资源请求**
+   - `vite.config.dev.ts`：新增 `shouldRenderSSR`，仅对 HTML 页面导航走 SSR
+   - 跳过 `/@`、`/sm/`、`/src/`、带扩展名、`/api/` 等应由 Vite 处理的请求
+   - 完善 catch 分支，非 SSR 请求失败时正确 `next(e)` 传递
+
+### Commit Message
+
+```
+fix: dev SSR 中间件跳过 source map 与非页面请求
+```
+
 ## 2026-05-24 18:25:00
 
 ### 改动内容
