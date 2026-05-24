@@ -14,7 +14,7 @@ import { createFetchRequest } from '@/utils/createFetchRequest'
 const APP_HTML = '<!--app-html-->'
 const APP_STATE = '<!--app-state-->'
 
-const serialize = (state: Record<string, unknown> | undefined) =>
+const serialize = (state: ReturnType<ReturnType<typeof createStore>['dehydrate']> | undefined) =>
     `<script>;window.__PREFETCHED_STATE__=${serializeJavascript(state)};</script>`
 
 export async function render(context: IRenderContext) {

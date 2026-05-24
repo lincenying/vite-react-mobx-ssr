@@ -18,5 +18,5 @@ export async function getArticleDetail(
     config: IApiConfig,
     api: IApiClient | IApiServer,
 ): Promise<IApiResponse<IArticle>> {
-    return api.get<IArticle>('/fetch/article/detail', config)
+    return api.get<IArticle>('/fetch/article/detail', { ...config })
 }

@@ -1,6 +1,6 @@
 import type { IApiResponse } from '@/types'
 import type { IApiServer } from '@/types/api'
-import axios from 'axios'
+import axios, { type AxiosRequestHeaders } from 'axios'
 import md5 from 'md5'
 import qs from 'qs'
 import config from './config-server'
@@ -47,7 +47,7 @@ export function api(cookies: Record<string, string>): IApiServer {
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
                     ...headers,
-                },
+                } as AxiosRequestHeaders,
             })
             if (config.cached && data.cache) {
                 config.cached.set(key, res)
@@ -68,7 +68,7 @@ export function api(cookies: Record<string, string>): IApiServer {
                 params,
                 headers: {
                     ...headers,
-                },
+                } as AxiosRequestHeaders,
             }).then((res) => {
                 if (config.cached && params.cache) {
                     config.cached.set(key, res)

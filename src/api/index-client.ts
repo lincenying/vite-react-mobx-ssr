@@ -7,7 +7,7 @@ type API = () => import('@/types/api').IApiClient
  * axios Api 封装
  */
 const _api: API = () => ({
-    async file(url, data) {
+    async file<T = void>(url: string, data: Record<string, unknown>) {
         const response = await axios({
             method: 'post',
             url,
@@ -16,8 +16,8 @@ const _api: API = () => ({
                 'X-Requested-With': 'XMLHttpRequest',
             },
         })
-        const res = checkHttpStatus(response)
-        return checkBusinessCode(res)
+        const res = checkHttpStatus<T>(response)
+        return checkBusinessCode<T>(res)
     },
     async post(url, data) {
         return request.post(url, data)

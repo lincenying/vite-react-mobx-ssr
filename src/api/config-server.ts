@@ -1,8 +1,9 @@
+import type { AxiosResponse } from 'axios'
 import { LRUCache } from 'lru-cache'
 import { getServerApiDomain } from '@/utils/env'
 
 const needCached = false
-const cached = needCached ? new LRUCache<string, unknown>({
+const cached = needCached ? new LRUCache<string, AxiosResponse>({
     max: 1000,
 }) : null
 

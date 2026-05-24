@@ -1,5 +1,42 @@
 # 变更记录
 
+## 2026-05-24 18:16:00
+
+### 改动内容
+
+1. **修复剩余 5 项 TypeScript 编译错误**
+   - `api/index-client.ts`：为 `file` 方法参数补充 `url`、`data` 显式类型
+   - `shims-global.d.ts`：`$timeout` 值类型改为 `number`（浏览器 `setTimeout` 返回值）
+   - `stores/index.ts`：`hydrate` / `dehydrate` 改为显式 `topics` / `article` 分支，消除联合类型关联推断失败
+
+### Commit Message
+
+```
+fix: 修复 index-client、useAutoScroll 与 stores 剩余 TS 错误
+```
+
+## 2026-05-24 18:00:00
+
+### 改动内容
+
+1. **修复 TypeScript 编译错误（22 项）**
+   - `shims-global.d.ts`：将 `Window` 等全局声明移入 `declare global`，修复 `$timeout`、`__PREFETCHED_STATE__` 无法识别
+   - `stores/index.ts`：`PickKeys` 改用 `infer _` 匹配 `PrefetchStore`；`dehydrate` 中 `{}` 后补分号避免 ASI 误解析
+   - `api/articleApi.ts`：详情接口参数展开为 `{ ...config }` 以兼容 `Record<string, unknown>`
+   - `api/config-server.ts`：`LRUCache` 泛型由 `unknown` 改为 `AxiosResponse`
+   - `api/index-client.ts`：`file` 方法补充泛型 `<T>` 与 `checkHttpStatus<T>` / `checkBusinessCode<T>`
+   - `api/index-server.ts`：Axios `headers` 断言为 `AxiosRequestHeaders`
+   - `main.tsx`：移除 `.tsx` 扩展名导入
+   - `pages/Home.tsx`：移除未使用的 `useMemo` 导入
+   - `index.server.tsx`：`serialize` 参数类型对齐 `dehydrate` 返回值
+
+### Commit Message
+
+```
+fix: 修复 tsc -b --noEmit 全部 TypeScript 编译错误
+```
+
+
 ## 2026-05-24
 
 ### 改动内容

@@ -10,7 +10,7 @@ export interface PrefetchStore<State> {
 }
 
 type PickKeys<T> = {
-    [K in keyof T]: T[K] extends PrefetchStore<unknown> ? K : never
+    [K in keyof T]: T[K] extends PrefetchStore<infer _> ? K : never
 }[keyof T]
 
 type DehydratedState = {
@@ -27,25 +27,25 @@ export class AppStore {
     }
 
     hydrate(data: DehydratedState) {
-        (Object.keys(data) as PickKeys<AppStore>[]).forEach((key) => {
+        if (data.topics) {
             if (import.meta.env.DEV) {
-                console.info(`hydrate ${key}`)
+                console.info('hydrate topics')
             }
-            const state = data[key]
-            if (state && this[key]) {
-                this[key]?.hydrate?.(state)
+            this.topics.hydrate(data.topics)
+        }
+        if (data.article) {
+            if (import.meta.env.DEV) {
+                console.info('hydrate article')
             }
-        })
+            this.article.hydrate(data.article)
+        }
     }
 
     dehydrate(): DehydratedState {
-        const data: DehydratedState = {}
-
-        (Object.keys(this) as PickKeys<AppStore>[]).forEach((key) => {
-            data[key] = this[key]?.dehydrate?.()
-        })
-
-        return data
+        return {
+            topics: this.topics.dehydrate(),
+            article: this.article.dehydrate(),
+        }
     }
 }
 
